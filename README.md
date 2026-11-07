@@ -14,9 +14,10 @@ An award-winning caliber, immersive, interactive personal portfolio website buil
    - Electric purple (`#9B5CFF`) & Cyan (`#00D9FF`) gradients with animated periodic light sweep.
    - Interactive hover mechanics per letter with magnetic cursor interaction.
 2. **Official Spline 3D Scene Integration**:
-   - Embeds Prateek's exact exported Spline 3D scene (`https://prod.spline.design/VaFskeBrBPZK9w1v/scene.splinecode`).
+   - Embeds Prateek's customized Spline 3D background scene (`https://prod.spline.design/1cIJsy8miiNDXCYE/scene.splinecode`).
+   - Seamless dual cursor event forwarding: interact with both the typography and 3D background simultaneously.
    - Non-blocking asynchronous loading so typography renders instantaneously.
-   - Preserves all native mouse tilt, lighting, animations, and hover interactions.
+   - Preserves all native mouse tilt, lighting, animations, and hover interactions without watermarks.
 3. **Interactive Branching Skill Tree**:
    - Central Root node: `MY TECH STACK`.
    - 4 major branches: **AI & Machine Learning**, **Web Development**, **Programming**, and **UI/UX & Creative Design**.
@@ -59,6 +60,11 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 npm run build
 ```
 Generates production-ready static assets in the `dist/` directory.
+
+### 🌐 Free Deployment
+
+- **Vercel**: Import the repository on [vercel.com](https://vercel.com) for one-click global CDN deployment with automated CI/CD.
+- **GitHub Pages**: Automated workflow included in `.github/workflows/deploy.yml`. Enable in your GitHub repository under **Settings** > **Pages** > **Source: GitHub Actions**.
 
 ---
 
