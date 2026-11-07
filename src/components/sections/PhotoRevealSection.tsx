@@ -17,86 +17,94 @@ interface SkillBubbleData {
   desktopPos: string;
 }
 
+// 6 Autonomous Wandering Soap Bubbles with grand-tour roving trajectories across the screen space
 const SKILL_BUBBLES: SkillBubbleData[] = [
   {
     id: 'python',
     name: 'Python',
     color: '#00D9FF',
-    glow: 'rgba(0, 217, 255, 0.55)',
-    pathX: [0, 38, -26, 32, -18, 0],
-    pathY: [0, -34, 26, -24, 18, 0],
-    rotate: [0, 4, -3, 5, -2, 0],
-    duration: 11.2,
+    glow: 'rgba(0, 217, 255, 0.45)',
+    // Roams vertically & horizontally across the entire left side (travels over 460px up & down)
+    pathX: [0, 90, -15, 140, 20, 160, -25, 80, 0],
+    pathY: [0, 150, 320, 460, 310, 140, 230, 50, 0],
+    rotate: [0, 6, -8, 7, -5, 6, -7, 3, 0],
+    duration: 23,
     wobbleDuration: '7.2s',
-    desktopPos: 'top-[4%] left-[2%] lg:left-[5%]'
+    desktopPos: 'top-[8%] left-[4%]'
   },
   {
     id: 'ml',
     name: 'Machine Learning',
     color: '#9B5CFF',
-    glow: 'rgba(155, 92, 255, 0.55)',
-    pathX: [0, -30, 36, -22, 26, 0],
-    pathY: [0, 30, -34, 26, -26, 0],
-    rotate: [0, -4, 5, -3, 3, 0],
-    duration: 13.5,
+    glow: 'rgba(155, 92, 255, 0.45)',
+    // Glides across the entire top open corridor above the card from left to right and back (over 480px traversal)
+    pathX: [0, 160, 340, 480, 320, 140, -50, 0],
+    pathY: [0, 35, -10, 45, -20, 25, -15, 0],
+    rotate: [0, -6, 8, -5, 7, -4, 3, 0],
+    duration: 25,
     wobbleDuration: '8.4s',
-    desktopPos: 'top-[38%] left-[0.5%] lg:left-[3%]'
+    desktopPos: 'top-[3%] left-[16%]'
   },
   {
     id: 'dl',
     name: 'Deep Learning',
     color: '#00FFAA',
-    glow: 'rgba(0, 255, 170, 0.55)',
-    pathX: [0, 34, -28, 30, -20, 0],
-    pathY: [0, -28, 32, -20, 24, 0],
-    rotate: [0, 3, -5, 4, -3, 0],
-    duration: 12.4,
+    glow: 'rgba(0, 255, 170, 0.45)',
+    // Roams diagonally across lower-left and middle-lower zones (travels up 280px and back)
+    pathX: [0, 120, 220, 80, -20, 150, 10, 100, 0],
+    pathY: [0, -160, -280, -140, -240, -80, -190, -60, 0],
+    rotate: [0, 5, -6, 7, -4, 6, -5, 2, 0],
+    duration: 22,
     wobbleDuration: '6.8s',
-    desktopPos: 'bottom-[6%] left-[2%] lg:left-[5%]'
+    desktopPos: 'bottom-[8%] left-[6%]'
   },
   {
     id: 'react',
     name: 'React',
     color: '#38BDF8',
-    glow: 'rgba(56, 189, 248, 0.55)',
-    pathX: [0, -38, 26, -32, 18, 0],
-    pathY: [0, 34, -26, 28, -20, 0],
-    rotate: [0, -5, 3, -4, 3, 0],
-    duration: 11.6,
+    glow: 'rgba(56, 189, 248, 0.45)',
+    // Roams vertically & horizontally across the entire right side (travels over 460px up & down)
+    pathX: [0, -90, 25, -140, -30, -150, 35, -70, 0],
+    pathY: [0, 160, 320, 460, 290, 150, 230, 60, 0],
+    rotate: [0, -7, 6, -8, 5, -6, 4, -2, 0],
+    duration: 21,
     wobbleDuration: '7.8s',
-    desktopPos: 'top-[4%] right-[2%] lg:right-[5%]'
+    desktopPos: 'top-[8%] right-[5%]'
   },
   {
     id: 'uiux',
     name: 'UI/UX Design',
     color: '#EC4899',
-    glow: 'rgba(236, 72, 153, 0.55)',
-    pathX: [0, 30, -34, 24, -28, 0],
-    pathY: [0, -32, 28, -24, 26, 0],
-    rotate: [0, 4, -4, 5, -2, 0],
-    duration: 13.8,
+    glow: 'rgba(236, 72, 153, 0.45)',
+    // Glides across the bottom open corridor underneath the card from right to left and back (over 480px traversal)
+    pathX: [0, -160, -340, -480, -320, -140, 50, 0],
+    pathY: [0, -35, 15, -45, 20, -25, 10, 0],
+    rotate: [0, 6, -5, 8, -6, 4, -3, 0],
+    duration: 26,
     wobbleDuration: '8.1s',
-    desktopPos: 'top-[38%] right-[0.5%] lg:right-[3%]'
+    desktopPos: 'bottom-[3%] right-[16%]'
   },
   {
     id: 'java',
     name: 'Java',
     color: '#F59E0B',
-    glow: 'rgba(245, 158, 11, 0.55)',
-    pathX: [0, -32, 30, -26, 22, 0],
-    pathY: [0, 26, -30, 24, -22, 0],
-    rotate: [0, -3, 5, -4, 2, 0],
-    duration: 10.8,
+    glow: 'rgba(245, 158, 11, 0.45)',
+    // Roams diagonally across mid-right to lower-right zones (swoops 300px upwards and back)
+    pathX: [0, -120, -70, 35, -140, -35, 20, -80, 0],
+    pathY: [0, -150, -300, -180, -70, -240, -120, -40, 0],
+    rotate: [0, -5, 7, -6, 5, -4, 6, -2, 0],
+    duration: 24,
     wobbleDuration: '6.5s',
-    desktopPos: 'bottom-[6%] right-[2%] lg:right-[5%]'
+    desktopPos: 'bottom-[12%] right-[8%]'
   }
 ];
 
 interface InteractiveBubbleProps {
   bubble: SkillBubbleData;
+  isMobile?: boolean;
 }
 
-const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
+const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble, isMobile }) => {
   const [isBursting, setIsBursting] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -111,6 +119,14 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
       setIsBursting(false);
     }, 850);
   };
+
+  const animX = isMobile
+    ? [0, 14, -12, 10, 0]
+    : bubble.pathX;
+  const animY = isMobile
+    ? [0, -12, 14, -8, 0]
+    : bubble.pathY;
+  const animDuration = isMobile ? 8.5 : bubble.duration;
 
   return (
     <div className="relative inline-flex items-center justify-center select-none">
@@ -157,14 +173,14 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
         )}
       </AnimatePresence>
 
-      {/* CONTINUOUS ORGANIC WANDERING MOTION */}
+      {/* CONTINUOUS AUTONOMOUS WANDERING MOTION OVER THE SCREEN SPACE */}
       <motion.div
         animate={
           isBursting
             ? { scale: 0, opacity: 0 }
             : {
-                x: bubble.pathX,
-                y: bubble.pathY,
+                x: animX,
+                y: animY,
                 rotate: bubble.rotate,
                 scale: 1,
                 opacity: 1
@@ -175,24 +191,24 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
             ? { duration: 0.2, ease: 'easeIn' }
             : {
                 x: {
-                  duration: bubble.duration,
+                  duration: animDuration,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
                 y: {
-                  duration: bubble.duration * 0.88,
+                  duration: animDuration * 0.9,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
                 rotate: {
-                  duration: bubble.duration * 1.2,
+                  duration: animDuration * 1.1,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
                 scale: { type: 'spring', stiffness: 400, damping: 15 }
               }
         }
-        whileHover={{ scale: 1.15 }}
+        whileHover={{ scale: 1.18 }}
         whileTap={{ scale: 0.92 }}
         onClick={handleClick}
         className="soap-bubble"
@@ -203,12 +219,12 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
           } as React.CSSProperties
         }
         title={`Click to pop ${bubble.name}`}
-        aria-label={`Interactive bubble: ${bubble.name}`}
+        aria-label={`Interactive soap bubble: ${bubble.name}`}
       >
-        {/* 1. Rotating Iridescent Chromatic Sheen */}
+        {/* 1. Rotating Iridescent Chromatic Sheen with hollowed transparent center */}
         <div className="soap-bubble-iridescence" />
 
-        {/* 2. Top-Left Primary Curved Highlight Arc */}
+        {/* 2. Top-Left Primary Curved Specular Highlight Arc */}
         <div className="soap-bubble-arc" />
 
         {/* 3. Pinpoint Specular Star Glint */}
@@ -221,7 +237,7 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
         <div
           className="soap-bubble-caustic"
           style={{
-            background: `radial-gradient(ellipse at center, ${bubble.color}55 0%, rgba(155, 92, 255, 0.25) 50%, transparent 80%)`
+            background: `radial-gradient(ellipse at center, ${bubble.color}45 0%, rgba(155, 92, 255, 0.2) 50%, transparent 80%)`
           }}
         />
 
@@ -277,10 +293,10 @@ export const PhotoRevealSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Central Stage: Photo Card in Center with Bubbles Moving around it without Overlap */}
-        <div className="relative flex items-center justify-center w-full max-w-5xl min-h-[500px] sm:min-h-[560px] lg:min-h-[600px]">
+        {/* Central Stage: Photo Card in Center with Autonomous Soap Bubbles Roaming Dynamically Over the Screen */}
+        <div className="relative flex items-center justify-center w-full max-w-5xl min-h-[520px] sm:min-h-[580px] lg:min-h-[640px]">
           
-          {/* Desktop Floating Bubbles (Stationed in designated left and right screen zones, wandering smoothly without touching the center card) */}
+          {/* Desktop Floating Soap Bubbles — freely roaming vast screen trajectories without colliding with the card */}
           <div className="hidden md:block absolute inset-0 pointer-events-none">
             {SKILL_BUBBLES.map((bubble) => (
               <div
@@ -391,12 +407,12 @@ export const PhotoRevealSection: React.FC = () => {
         <div className="md:hidden flex flex-col items-center gap-6 mt-6 w-full max-w-sm">
           <div className="flex justify-center gap-3">
             {SKILL_BUBBLES.slice(0, 3).map((bubble) => (
-              <FloatingBubbleSphere key={bubble.id} bubble={bubble} />
+              <FloatingBubbleSphere key={bubble.id} bubble={bubble} isMobile={true} />
             ))}
           </div>
           <div className="flex justify-center gap-3">
             {SKILL_BUBBLES.slice(3, 6).map((bubble) => (
-              <FloatingBubbleSphere key={bubble.id} bubble={bubble} />
+              <FloatingBubbleSphere key={bubble.id} bubble={bubble} isMobile={true} />
             ))}
           </div>
         </div>
