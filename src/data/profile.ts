@@ -46,3 +46,4 @@ export const profileData: Profile = {
     resumeUrl: null // Set to string URL when resume is available
   }
 };
+

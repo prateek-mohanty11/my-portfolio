@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Mail, Copy, Check, Send, Code2, MessageSquare } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { profileData } from '../../data/profile';
 import { SectionHeading } from '../ui/SectionHeading';
 import { TiltCard } from '../ui/TiltCard';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
+import { automationConfig } from '../../config/automation';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -11,20 +13,64 @@ export const Contact: React.FC = () => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(profileData.contact.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
+
+    // Cyberpunk-colored celebratory confetti burst
+    confetti({
+      particleCount: 45,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#00D9FF', '#9B5CFF', '#F5F5FA']
+    });
+
+    setTimeout(() => setCopied(false), 2400);
   };
 
-  const handleMailtoSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setStatusMessage(null);
+
+    // If a real webhook integration is configured via Antigravity Automation
+    if (automationConfig.features.contactWebhookUrl) {
+      try {
+        const response = await fetch(automationConfig.features.contactWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message, timestamp: new Date().toISOString() })
+        });
+        if (response.ok) {
+          setStatusMessage("Message transmitted successfully!");
+          setName('');
+          setEmail('');
+          setSubject('');
+          setMessage('');
+          confetti({
+            particleCount: 70,
+            spread: 75,
+            origin: { y: 0.7 },
+            colors: ['#00D9FF', '#9B5CFF']
+          });
+          setIsSubmitting(false);
+          return;
+        }
+      } catch (err) {
+        // Fall through to mailto fallback
+      }
+    }
+
+    // Default authentic mailto fallback
     const mailtoSubject = encodeURIComponent(subject || `Message from ${name || 'Portfolio Visitor'}`);
     const mailtoBody = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     );
     window.location.href = `mailto:${profileData.contact.email}?subject=${mailtoSubject}&body=${mailtoBody}`;
+    setIsSubmitting(false);
   };
 
   return (
@@ -134,7 +180,13 @@ export const Contact: React.FC = () => {
                 </h4>
               </div>
 
-              <form onSubmit={handleMailtoSubmit} className="space-y-4">
+              {statusMessage && (
+                <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                  {statusMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-mono text-[#A3A8B8] mb-1.5 uppercase">
@@ -200,10 +252,11 @@ export const Contact: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-xs text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_20px_rgba(155,92,255,0.35)] transition-all transform hover:-translate-y-0.5"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-semibold text-xs text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_20px_rgba(155,92,255,0.35)] transition-all transform hover:-translate-y-0.5 disabled:opacity-50"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    <span>Send via Mail Client</span>
+                    <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
                   </button>
                 </div>
               </form>

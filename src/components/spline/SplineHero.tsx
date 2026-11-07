@@ -90,3 +90,4 @@ export const SplineHero: React.FC = () => {
     </div>
   );
 };
+

@@ -89,3 +89,4 @@ export const projectsData: Project[] = [
     glowColor: "rgba(59, 130, 246, 0.3)"
   }
 ];
+

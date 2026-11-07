@@ -28,3 +28,4 @@ export function useActiveSection(sectionIds: string[], offset: number = 200): st
 
   return activeSection;
 }
+
