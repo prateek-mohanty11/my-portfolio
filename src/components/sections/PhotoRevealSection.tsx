@@ -9,9 +9,12 @@ interface SkillBubbleData {
   name: string;
   color: string;
   glow: string;
-  floatDuration: number;
-  positionDesktop: string;
-  positionMobile: string;
+  pathX: number[];
+  pathY: number[];
+  rotate: number[];
+  duration: number;
+  wobbleDuration: string;
+  desktopPos: string;
 }
 
 const SKILL_BUBBLES: SkillBubbleData[] = [
@@ -19,55 +22,73 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     id: 'python',
     name: 'Python',
     color: '#00D9FF',
-    glow: 'rgba(0, 217, 255, 0.5)',
-    floatDuration: 3.2,
-    positionDesktop: 'top-6 -left-36 lg:-left-44',
-    positionMobile: ''
+    glow: 'rgba(0, 217, 255, 0.55)',
+    pathX: [0, 38, -26, 32, -18, 0],
+    pathY: [0, -34, 26, -24, 18, 0],
+    rotate: [0, 4, -3, 5, -2, 0],
+    duration: 11.2,
+    wobbleDuration: '7.2s',
+    desktopPos: 'top-[4%] left-[2%] lg:left-[5%]'
   },
   {
     id: 'ml',
     name: 'Machine Learning',
     color: '#9B5CFF',
-    glow: 'rgba(155, 92, 255, 0.5)',
-    floatDuration: 4.0,
-    positionDesktop: 'top-1/2 -translate-y-1/2 -left-44 lg:-left-56',
-    positionMobile: ''
+    glow: 'rgba(155, 92, 255, 0.55)',
+    pathX: [0, -30, 36, -22, 26, 0],
+    pathY: [0, 30, -34, 26, -26, 0],
+    rotate: [0, -4, 5, -3, 3, 0],
+    duration: 13.5,
+    wobbleDuration: '8.4s',
+    desktopPos: 'top-[38%] left-[0.5%] lg:left-[3%]'
   },
   {
     id: 'dl',
     name: 'Deep Learning',
     color: '#00FFAA',
-    glow: 'rgba(0, 255, 170, 0.5)',
-    floatDuration: 3.6,
-    positionDesktop: 'bottom-8 -left-36 lg:-left-48',
-    positionMobile: ''
+    glow: 'rgba(0, 255, 170, 0.55)',
+    pathX: [0, 34, -28, 30, -20, 0],
+    pathY: [0, -28, 32, -20, 24, 0],
+    rotate: [0, 3, -5, 4, -3, 0],
+    duration: 12.4,
+    wobbleDuration: '6.8s',
+    desktopPos: 'bottom-[6%] left-[2%] lg:left-[5%]'
   },
   {
     id: 'react',
     name: 'React',
     color: '#38BDF8',
-    glow: 'rgba(56, 189, 248, 0.5)',
-    floatDuration: 3.4,
-    positionDesktop: 'top-6 -right-36 lg:-right-44',
-    positionMobile: ''
+    glow: 'rgba(56, 189, 248, 0.55)',
+    pathX: [0, -38, 26, -32, 18, 0],
+    pathY: [0, 34, -26, 28, -20, 0],
+    rotate: [0, -5, 3, -4, 3, 0],
+    duration: 11.6,
+    wobbleDuration: '7.8s',
+    desktopPos: 'top-[4%] right-[2%] lg:right-[5%]'
   },
   {
     id: 'uiux',
     name: 'UI/UX Design',
     color: '#EC4899',
-    glow: 'rgba(236, 72, 153, 0.5)',
-    floatDuration: 4.2,
-    positionDesktop: 'top-1/2 -translate-y-1/2 -right-44 lg:-right-56',
-    positionMobile: ''
+    glow: 'rgba(236, 72, 153, 0.55)',
+    pathX: [0, 30, -34, 24, -28, 0],
+    pathY: [0, -32, 28, -24, 26, 0],
+    rotate: [0, 4, -4, 5, -2, 0],
+    duration: 13.8,
+    wobbleDuration: '8.1s',
+    desktopPos: 'top-[38%] right-[0.5%] lg:right-[3%]'
   },
   {
     id: 'java',
     name: 'Java',
     color: '#F59E0B',
-    glow: 'rgba(245, 158, 11, 0.5)',
-    floatDuration: 3.8,
-    positionDesktop: 'bottom-8 -right-36 lg:-right-48',
-    positionMobile: ''
+    glow: 'rgba(245, 158, 11, 0.55)',
+    pathX: [0, -32, 30, -26, 22, 0],
+    pathY: [0, 26, -30, 24, -22, 0],
+    rotate: [0, -3, 5, -4, 2, 0],
+    duration: 10.8,
+    wobbleDuration: '6.5s',
+    desktopPos: 'bottom-[6%] right-[2%] lg:right-[5%]'
   }
 ];
 
@@ -75,7 +96,7 @@ interface InteractiveBubbleProps {
   bubble: SkillBubbleData;
 }
 
-const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
+const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
   const [isBursting, setIsBursting] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -85,35 +106,49 @@ const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
     soundFx.playHover();
     setIsBursting(true);
 
-    // Auto-restore after burst animation
+    // Re-inflate soap bubble after burst animation
     setTimeout(() => {
       setIsBursting(false);
-    }, 900);
+    }, 850);
   };
 
   return (
-    <div className="relative inline-flex items-center justify-center">
-      {/* Burst Particles */}
+    <div className="relative inline-flex items-center justify-center select-none">
+      {/* Radial Particle & Shockwave Burst */}
       <AnimatePresence>
         {isBursting && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-            {Array.from({ length: 6 }).map((_, i) => {
-              const angle = (i * 60) * (Math.PI / 180);
-              const distance = 46;
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
+            {/* Expanding Shockwave Ring */}
+            <motion.div
+              initial={{ scale: 0.5, opacity: 1 }}
+              animate={{ scale: 2.4, opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="absolute w-20 h-20 rounded-full border-2"
+              style={{
+                borderColor: bubble.color,
+                boxShadow: `0 0 20px ${bubble.glow}`
+              }}
+            />
+
+            {/* 10 Radial Iridescent Spark Particles */}
+            {Array.from({ length: 10 }).map((_, i) => {
+              const angle = (i * 36) * (Math.PI / 180);
+              const distance = 46 + (i % 3) * 16;
               const x = Math.cos(angle) * distance;
               const y = Math.sin(angle) * distance;
 
               return (
                 <motion.span
                   key={i}
-                  initial={{ x: 0, y: 0, scale: 1.2, opacity: 1 }}
+                  initial={{ x: 0, y: 0, scale: 1.5, opacity: 1 }}
                   animate={{ x, y, scale: 0, opacity: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute w-2 h-2 rounded-full"
+                  className="absolute w-2.5 h-2.5 rounded-full"
                   style={{
                     backgroundColor: bubble.color,
-                    boxShadow: `0 0 10px ${bubble.glow}`
+                    boxShadow: `0 0 12px ${bubble.glow}`
                   }}
                 />
               );
@@ -122,47 +157,88 @@ const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
         )}
       </AnimatePresence>
 
-      {/* Bubble Pill */}
-      <motion.button
-        onClick={handleClick}
+      {/* CONTINUOUS ORGANIC WANDERING MOTION */}
+      <motion.div
         animate={
           isBursting
             ? { scale: 0, opacity: 0 }
             : {
+                x: bubble.pathX,
+                y: bubble.pathY,
+                rotate: bubble.rotate,
                 scale: 1,
-                opacity: 1,
-                y: [0, -8, 0]
+                opacity: 1
               }
         }
         transition={
           isBursting
-            ? { duration: 0.25 }
+            ? { duration: 0.2, ease: 'easeIn' }
             : {
+                x: {
+                  duration: bubble.duration,
+                  repeat: Infinity,
+                  ease: 'easeInOut'
+                },
                 y: {
-                  duration: bubble.floatDuration,
+                  duration: bubble.duration * 0.88,
+                  repeat: Infinity,
+                  ease: 'easeInOut'
+                },
+                rotate: {
+                  duration: bubble.duration * 1.2,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
                 scale: { type: 'spring', stiffness: 400, damping: 15 }
               }
         }
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        className="group relative px-4 py-2 rounded-full bg-[#0C0E15]/90 border border-white/10 hover:border-white/30 backdrop-blur-md shadow-lg cursor-pointer flex items-center gap-2 select-none transition-colors"
-        style={{
-          boxShadow: `0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 15px -3px ${bubble.glow}`
-        }}
-        title={`Click to burst ${bubble.name}`}
-        aria-label={`Skill node: ${bubble.name}`}
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.92 }}
+        onClick={handleClick}
+        className="soap-bubble"
+        style={
+          {
+            '--wobble-duration': bubble.wobbleDuration,
+            '--bubble-glow': bubble.glow
+          } as React.CSSProperties
+        }
+        title={`Click to pop ${bubble.name}`}
+        aria-label={`Interactive bubble: ${bubble.name}`}
       >
-        <span
-          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-          style={{ backgroundColor: bubble.color, boxShadow: `0 0 8px ${bubble.color}` }}
+        {/* 1. Rotating Iridescent Chromatic Sheen */}
+        <div className="soap-bubble-iridescence" />
+
+        {/* 2. Top-Left Primary Curved Highlight Arc */}
+        <div className="soap-bubble-arc" />
+
+        {/* 3. Pinpoint Specular Star Glint */}
+        <div className="soap-bubble-glint" />
+
+        {/* 4. Secondary Bottom-Right Curved Reflection */}
+        <div className="soap-bubble-secondary-arc" />
+
+        {/* 5. Bottom Caustic Pool */}
+        <div
+          className="soap-bubble-caustic"
+          style={{
+            background: `radial-gradient(ellipse at center, ${bubble.color}55 0%, rgba(155, 92, 255, 0.25) 50%, transparent 80%)`
+          }}
         />
-        <span className="font-mono text-xs font-semibold text-[#F5F5FA] group-hover:text-white tracking-wide whitespace-nowrap">
-          {bubble.name}
-        </span>
-      </motion.button>
+
+        {/* 6. Crisp, Ultra-Readable Nameplate inside the Bubble */}
+        <div className="soap-bubble-content">
+          <span className="soap-bubble-title">
+            {bubble.name}
+          </span>
+          <span
+            className="soap-bubble-dot"
+            style={{
+              backgroundColor: bubble.color,
+              boxShadow: `0 0 8px ${bubble.color}`
+            }}
+          />
+        </div>
+      </motion.div>
     </div>
   );
 };
@@ -182,8 +258,8 @@ export const PhotoRevealSection: React.FC = () => {
       id="persona-card"
       className="relative py-16 sm:py-24 bg-[#08090D] overflow-hidden border-t border-b border-white/[0.06]"
     >
-      {/* Background cyber ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-[#9B5CFF]/10 via-[#00D9FF]/10 to-transparent rounded-full blur-[110px] pointer-events-none" />
+      {/* Ambient background lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#9B5CFF]/10 via-[#00D9FF]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
         
@@ -197,34 +273,34 @@ export const PhotoRevealSection: React.FC = () => {
             Interactive Neural Persona
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-[#9095A6] font-sans leading-relaxed">
-            Hover over the cyber card to decrypt identity photo. Click skill nodes to test particle burst kinetics.
+            Hover over the card to decrypt identity photo. Click orbiting soap bubbles to pop them.
           </p>
         </div>
 
-        {/* Central Stage: Photo Card surrounded by Interactive Skill Bubbles */}
-        <div className="relative flex items-center justify-center w-full max-w-3xl min-h-[380px] sm:min-h-[440px]">
+        {/* Central Stage: Photo Card in Center with Bubbles Moving around it without Overlap */}
+        <div className="relative flex items-center justify-center w-full max-w-5xl min-h-[500px] sm:min-h-[560px] lg:min-h-[600px]">
           
-          {/* Desktop Skill Bubbles (Positioned organically in 3D space around the card) */}
+          {/* Desktop Floating Bubbles (Stationed in designated left and right screen zones, wandering smoothly without touching the center card) */}
           <div className="hidden md:block absolute inset-0 pointer-events-none">
             {SKILL_BUBBLES.map((bubble) => (
               <div
                 key={bubble.id}
-                className={`absolute ${bubble.positionDesktop} pointer-events-auto z-20`}
+                className={`absolute ${bubble.desktopPos} pointer-events-auto z-20`}
               >
-                <InteractiveBubble bubble={bubble} />
+                <FloatingBubbleSphere bubble={bubble} />
               </div>
             ))}
           </div>
 
-          {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION */}
+          {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION (CENTER STAGE) */}
           <div
-            className="photo-card-wrapper z-10"
+            className="photo-card-wrapper z-10 my-4"
             onMouseEnter={handleFirstHover}
             onTouchStart={handleFirstHover}
           >
             <div className="container noselect">
               <div className="canvas">
-                {/* All 25 3D Tracking Quadrants for Full Fluid Perspective Tilt */}
+                {/* 25 3D Tracking Quadrants for Perspective Tilt */}
                 <div className="tracker tr-1" />
                 <div className="tracker tr-2" />
                 <div className="tracker tr-3" />
@@ -311,11 +387,18 @@ export const PhotoRevealSection: React.FC = () => {
 
         </div>
 
-        {/* Mobile Skill Bubbles (Flexibly displayed below card on small viewports) */}
-        <div className="md:hidden flex flex-wrap items-center justify-center gap-2.5 mt-8 w-full max-w-sm">
-          {SKILL_BUBBLES.map((bubble) => (
-            <InteractiveBubble key={bubble.id} bubble={bubble} />
-          ))}
+        {/* Mobile Floating Bubbles (Arranged cleanly with organic drift and zero overlap on smaller screens) */}
+        <div className="md:hidden flex flex-col items-center gap-6 mt-6 w-full max-w-sm">
+          <div className="flex justify-center gap-3">
+            {SKILL_BUBBLES.slice(0, 3).map((bubble) => (
+              <FloatingBubbleSphere key={bubble.id} bubble={bubble} />
+            ))}
+          </div>
+          <div className="flex justify-center gap-3">
+            {SKILL_BUBBLES.slice(3, 6).map((bubble) => (
+              <FloatingBubbleSphere key={bubble.id} bubble={bubble} />
+            ))}
+          </div>
         </div>
 
       </div>
