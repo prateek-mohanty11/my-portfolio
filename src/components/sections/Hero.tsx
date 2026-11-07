@@ -5,6 +5,7 @@ import { profileData } from '../../data/profile';
 import { SplineHero } from '../spline/SplineHero';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
 import { soundFx } from '../../utils/audio';
+import { forwardToCanvas } from '../../utils/forwardCanvasEvent';
 
 const firstName = "PRATEEK";
 const lastName = "MOHANTY.";
@@ -51,7 +52,7 @@ export const Hero: React.FC = () => {
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#9B5CFF]/15 rounded-full blur-[120px] pointer-events-none z-0" />
       <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#00D9FF]/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      {/* FOREGROUND HERO CONTENT (Floats seamlessly over the 3D background) */}
+      {/* FOREGROUND HERO CONTENT (Floats seamlessly over the 3D background with pointer event passthrough) */}
       <div className="max-w-7xl mx-auto w-full relative z-10 pointer-events-none flex flex-col justify-center text-left">
         <div className="max-w-3xl">
           
@@ -60,19 +61,26 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="flex items-center gap-2 mb-3 sm:mb-4 pointer-events-auto"
+            className="flex items-center gap-2 mb-3 sm:mb-4 pointer-events-none w-fit"
           >
-            <span className="px-3.5 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-[#151824]/90 backdrop-blur-md border border-[#9B5CFF]/30 text-[#00D9FF] flex items-center gap-2 shadow-[0_0_15px_rgba(155,92,255,0.2)]">
+            <span
+              onPointerMove={forwardToCanvas}
+              onMouseMove={forwardToCanvas}
+              className="px-3.5 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-[#151824]/90 backdrop-blur-md border border-[#9B5CFF]/30 text-[#00D9FF] flex items-center gap-2 shadow-[0_0_15px_rgba(155,92,255,0.2)] pointer-events-auto cursor-default"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
               HELLO, I'M
             </span>
-            <span className="text-xs font-mono text-[#A3A8B8] hidden sm:inline-block">
+            <span className="text-xs font-mono text-[#A3A8B8] hidden sm:inline-block pointer-events-none">
               // B.Tech AI & ML • 3rd Year
             </span>
           </motion.div>
 
-          {/* SIGNATURE CINEMATIC NAME REVEAL */}
-          <div className="relative my-2 select-none pointer-events-auto" aria-label="Prateek Mohanty">
+          {/* SIGNATURE CINEMATIC NAME REVEAL WITH SIMULTANEOUS 3D PASS-THROUGH & HOVER REACTION */}
+          <div
+            className="relative my-2 select-none pointer-events-none w-fit max-w-full"
+            aria-label="Prateek Mohanty"
+          >
             <motion.h1
               variants={letterContainerVariants}
               initial="hidden"
@@ -80,20 +88,24 @@ export const Hero: React.FC = () => {
               className="font-display font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.96]"
             >
               {/* First Name: PRATEEK */}
-              <div className="overflow-hidden flex items-center">
+              <div className="overflow-hidden flex items-center pointer-events-none">
                 {firstName.split("").map((char, index) => (
                   <motion.span
                     key={`first-${index}`}
                     variants={letterVariants}
                     onMouseEnter={() => soundFx.playHover()}
+                    onPointerMove={forwardToCanvas}
+                    onMouseMove={forwardToCanvas}
+                    onPointerDown={forwardToCanvas}
+                    onPointerUp={forwardToCanvas}
                     whileHover={{
-                      y: -8,
-                      scale: 1.1,
+                      y: -10,
+                      scale: 1.18,
                       color: '#00D9FF',
-                      textShadow: '0 0 25px rgba(0, 217, 255, 0.8)',
-                      transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
+                      textShadow: '0 0 35px rgba(0, 217, 255, 0.95)',
+                      transition: { type: 'spring' as const, stiffness: 450, damping: 12 }
                     }}
-                    className="inline-block cursor-default text-[#F5F5FA] drop-shadow-lg transition-colors"
+                    className="inline-block cursor-pointer px-[1px] text-[#F5F5FA] drop-shadow-lg transition-colors pointer-events-auto"
                   >
                     {char}
                   </motion.span>
@@ -101,20 +113,24 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Last Name: MOHANTY. with Gradient and Light Sweep */}
-              <div className="overflow-hidden relative flex items-center mt-1 sm:mt-2">
+              <div className="overflow-hidden relative flex items-center mt-1 sm:mt-2 pointer-events-none">
                 {lastName.split("").map((char, index) => (
                   <motion.span
                     key={`last-${index}`}
                     variants={letterVariants}
                     onMouseEnter={() => soundFx.playHover()}
+                    onPointerMove={forwardToCanvas}
+                    onMouseMove={forwardToCanvas}
+                    onPointerDown={forwardToCanvas}
+                    onPointerUp={forwardToCanvas}
                     whileHover={{
-                      y: -8,
-                      scale: 1.1,
+                      y: -10,
+                      scale: 1.18,
                       color: '#9B5CFF',
-                      textShadow: '0 0 30px rgba(155, 92, 255, 0.9)',
-                      transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
+                      textShadow: '0 0 40px rgba(155, 92, 255, 1)',
+                      transition: { type: 'spring' as const, stiffness: 450, damping: 12 }
                     }}
-                    className={`inline-block cursor-default drop-shadow-lg transition-colors ${
+                    className={`inline-block cursor-pointer px-[1px] drop-shadow-lg transition-colors pointer-events-auto ${
                       char === '.' ? 'text-[#00D9FF]' : 'text-gradient-purple-cyan'
                     }`}
                   >
@@ -135,7 +151,7 @@ export const Hero: React.FC = () => {
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               style={{ originX: 0 }}
-              className="h-[2px] w-48 sm:w-64 bg-gradient-to-r from-[#9B5CFF] via-[#00D9FF] to-transparent mt-4 shadow-[0_0_10px_#00D9FF]"
+              className="h-[2px] w-48 sm:w-64 bg-gradient-to-r from-[#9B5CFF] via-[#00D9FF] to-transparent mt-4 shadow-[0_0_10px_#00D9FF] pointer-events-none"
             />
           </div>
 
@@ -144,15 +160,19 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-5 sm:mt-6 mb-4 sm:mb-5 pointer-events-auto"
+            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-5 sm:mt-6 mb-4 sm:mb-5 pointer-events-none"
           >
             {profileData.headline.map((item, idx) => (
               <React.Fragment key={item}>
-                <span className="text-xs sm:text-base font-display font-medium text-[#F5F5FA] bg-[#10121A]/85 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-white/10 shadow-lg">
+                <span
+                  onPointerMove={forwardToCanvas}
+                  onMouseMove={forwardToCanvas}
+                  className="text-xs sm:text-base font-display font-medium text-[#F5F5FA] bg-[#10121A]/85 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-white/10 shadow-lg pointer-events-auto cursor-default"
+                >
                   {item}
                 </span>
                 {idx < profileData.headline.length - 1 && (
-                  <span className="text-[#9B5CFF] font-bold text-xs">•</span>
+                  <span className="text-[#9B5CFF] font-bold text-xs pointer-events-none">•</span>
                 )}
               </React.Fragment>
             ))}
@@ -163,7 +183,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="text-sm sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-6 sm:mb-8 font-sans bg-[#08090D]/50 backdrop-blur-sm p-2 sm:p-2.5 rounded-xl border border-white/5"
+            className="text-sm sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-6 sm:mb-8 font-sans bg-[#08090D]/50 backdrop-blur-sm p-2 sm:p-2.5 rounded-xl border border-white/5 pointer-events-none"
           >
             "Exploring intelligent technologies. Building meaningful digital experiences. Turning ideas into reality."
           </motion.p>
@@ -173,12 +193,12 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 pointer-events-auto"
+            className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 pointer-events-none"
           >
             <a
               href="#projects"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_25px_rgba(155,92,255,0.4)] transition-all transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_25px_rgba(155,92,255,0.4)] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
             >
               <Sparkles className="w-4 h-4 text-[#00D9FF]" />
               <span>Explore My Work</span>
@@ -187,7 +207,7 @@ export const Hero: React.FC = () => {
             <a
               href="#contact"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-[#F5F5FA] bg-[#10121A]/90 backdrop-blur-md border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-[#F5F5FA] bg-[#10121A]/90 backdrop-blur-md border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
             >
               <span>Let's Connect</span>
             </a>
@@ -198,12 +218,12 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.75 }}
-            className="flex items-center gap-3 sm:gap-4 text-[#A3A8B8] pointer-events-auto"
+            className="flex items-center gap-3 sm:gap-4 text-[#A3A8B8] pointer-events-none"
           >
-            <span className="text-xs font-mono uppercase tracking-wider text-[#A3A8B8]/70">
+            <span className="text-xs font-mono uppercase tracking-wider text-[#A3A8B8]/70 pointer-events-none">
               Profiles:
             </span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 pointer-events-auto">
               <a
                 href={profileData.contact.github}
                 target="_blank"
