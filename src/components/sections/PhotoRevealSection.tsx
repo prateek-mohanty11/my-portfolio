@@ -9,102 +9,148 @@ interface SkillBubbleData {
   name: string;
   color: string;
   glow: string;
-  pathX: number[];
-  pathY: number[];
-  rotate: number[];
-  duration: number;
-  wobbleDuration: string;
-  desktopPos: string;
+  floatDuration: number;
+  positionDesktop: string;
+  positionMobile: string;
 }
 
-// 6 Autonomous Wandering Soap Bubbles with grand-tour roving trajectories across the screen space
 const SKILL_BUBBLES: SkillBubbleData[] = [
+  // Left Side Constellation (7 Skills)
   {
     id: 'python',
     name: 'Python',
     color: '#00D9FF',
-    glow: 'rgba(0, 217, 255, 0.45)',
-    // Roams vertically & horizontally across the entire left side (travels over 460px up & down)
-    pathX: [0, 90, -15, 140, 20, 160, -25, 80, 0],
-    pathY: [0, 150, 320, 460, 310, 140, 230, 50, 0],
-    rotate: [0, 6, -8, 7, -5, 6, -7, 3, 0],
-    duration: 23,
-    wobbleDuration: '7.2s',
-    desktopPos: 'top-[8%] left-[4%]'
+    glow: 'rgba(0, 217, 255, 0.5)',
+    floatDuration: 3.2,
+    positionDesktop: 'top-2 -left-28 lg:-left-44',
+    positionMobile: ''
+  },
+  {
+    id: 'ts',
+    name: 'TypeScript',
+    color: '#3178C6',
+    glow: 'rgba(49, 120, 198, 0.5)',
+    floatDuration: 3.7,
+    positionDesktop: 'top-16 -left-60 lg:-left-76',
+    positionMobile: ''
   },
   {
     id: 'ml',
     name: 'Machine Learning',
     color: '#9B5CFF',
-    glow: 'rgba(155, 92, 255, 0.45)',
-    // Glides across the entire top open corridor above the card from left to right and back (over 480px traversal)
-    pathX: [0, 160, 340, 480, 320, 140, -50, 0],
-    pathY: [0, 35, -10, 45, -20, 25, -15, 0],
-    rotate: [0, -6, 8, -5, 7, -4, 3, 0],
-    duration: 25,
-    wobbleDuration: '8.4s',
-    desktopPos: 'top-[3%] left-[16%]'
+    glow: 'rgba(155, 92, 255, 0.5)',
+    floatDuration: 4.1,
+    positionDesktop: 'top-[36%] -left-32 lg:-left-52',
+    positionMobile: ''
+  },
+  {
+    id: 'nlp',
+    name: 'NLP',
+    color: '#A855F7',
+    glow: 'rgba(168, 85, 247, 0.5)',
+    floatDuration: 3.5,
+    positionDesktop: 'top-[52%] -left-64 lg:-left-80',
+    positionMobile: ''
+  },
+  {
+    id: 'cv',
+    name: 'Computer Vision',
+    color: '#10B981',
+    glow: 'rgba(16, 185, 129, 0.5)',
+    floatDuration: 3.9,
+    positionDesktop: 'top-[68%] -left-28 lg:-left-44',
+    positionMobile: ''
   },
   {
     id: 'dl',
     name: 'Deep Learning',
     color: '#00FFAA',
-    glow: 'rgba(0, 255, 170, 0.45)',
-    // Roams diagonally across lower-left and middle-lower zones (travels up 280px and back)
-    pathX: [0, 120, 220, 80, -20, 150, 10, 100, 0],
-    pathY: [0, -160, -280, -140, -240, -80, -190, -60, 0],
-    rotate: [0, 5, -6, 7, -4, 6, -5, 2, 0],
-    duration: 22,
-    wobbleDuration: '6.8s',
-    desktopPos: 'bottom-[8%] left-[6%]'
+    glow: 'rgba(0, 255, 170, 0.5)',
+    floatDuration: 3.4,
+    positionDesktop: 'bottom-6 -left-56 lg:-left-72',
+    positionMobile: ''
   },
+  {
+    id: 'numpy',
+    name: 'NumPy & Pandas',
+    color: '#6366F1',
+    glow: 'rgba(99, 102, 241, 0.5)',
+    floatDuration: 4.3,
+    positionDesktop: 'bottom-[-16px] -left-16 lg:-left-32',
+    positionMobile: ''
+  },
+
+  // Right Side Constellation (7 Skills)
   {
     id: 'react',
     name: 'React',
     color: '#38BDF8',
-    glow: 'rgba(56, 189, 248, 0.45)',
-    // Roams vertically & horizontally across the entire right side (travels over 460px up & down)
-    pathX: [0, -90, 25, -140, -30, -150, 35, -70, 0],
-    pathY: [0, 160, 320, 460, 290, 150, 230, 60, 0],
-    rotate: [0, -7, 6, -8, 5, -6, 4, -2, 0],
-    duration: 21,
-    wobbleDuration: '7.8s',
-    desktopPos: 'top-[8%] right-[5%]'
+    glow: 'rgba(56, 189, 248, 0.5)',
+    floatDuration: 3.3,
+    positionDesktop: 'top-2 -right-28 lg:-right-44',
+    positionMobile: ''
+  },
+  {
+    id: 'tailwind',
+    name: 'Tailwind CSS',
+    color: '#06B6D4',
+    glow: 'rgba(6, 182, 212, 0.5)',
+    floatDuration: 3.8,
+    positionDesktop: 'top-16 -right-60 lg:-right-76',
+    positionMobile: ''
   },
   {
     id: 'uiux',
     name: 'UI/UX Design',
     color: '#EC4899',
-    glow: 'rgba(236, 72, 153, 0.45)',
-    // Glides across the bottom open corridor underneath the card from right to left and back (over 480px traversal)
-    pathX: [0, -160, -340, -480, -320, -140, 50, 0],
-    pathY: [0, -35, 15, -45, 20, -25, 10, 0],
-    rotate: [0, 6, -5, 8, -6, 4, -3, 0],
-    duration: 26,
-    wobbleDuration: '8.1s',
-    desktopPos: 'bottom-[3%] right-[16%]'
+    glow: 'rgba(236, 72, 153, 0.5)',
+    floatDuration: 4.2,
+    positionDesktop: 'top-[36%] -right-32 lg:-right-52',
+    positionMobile: ''
+  },
+  {
+    id: 'figma',
+    name: 'Figma',
+    color: '#F43F5E',
+    glow: 'rgba(244, 63, 94, 0.5)',
+    floatDuration: 3.6,
+    positionDesktop: 'top-[52%] -right-64 lg:-right-80',
+    positionMobile: ''
+  },
+  {
+    id: 'threejs',
+    name: 'Three.js',
+    color: '#10E7B2',
+    glow: 'rgba(16, 231, 178, 0.5)',
+    floatDuration: 4.0,
+    positionDesktop: 'top-[68%] -right-28 lg:-right-44',
+    positionMobile: ''
   },
   {
     id: 'java',
     name: 'Java',
     color: '#F59E0B',
-    glow: 'rgba(245, 158, 11, 0.45)',
-    // Roams diagonally across mid-right to lower-right zones (swoops 300px upwards and back)
-    pathX: [0, -120, -70, 35, -140, -35, 20, -80, 0],
-    pathY: [0, -150, -300, -180, -70, -240, -120, -40, 0],
-    rotate: [0, -5, 7, -6, 5, -4, 6, -2, 0],
-    duration: 24,
-    wobbleDuration: '6.5s',
-    desktopPos: 'bottom-[12%] right-[8%]'
+    glow: 'rgba(245, 158, 11, 0.5)',
+    floatDuration: 3.5,
+    positionDesktop: 'bottom-6 -right-56 lg:-right-72',
+    positionMobile: ''
+  },
+  {
+    id: 'cprog',
+    name: 'C Programming',
+    color: '#60A5FA',
+    glow: 'rgba(96, 165, 250, 0.5)',
+    floatDuration: 4.4,
+    positionDesktop: 'bottom-[-16px] -right-16 lg:-right-32',
+    positionMobile: ''
   }
 ];
 
 interface InteractiveBubbleProps {
   bubble: SkillBubbleData;
-  isMobile?: boolean;
 }
 
-const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble, isMobile }) => {
+const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
   const [isBursting, setIsBursting] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -114,57 +160,35 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble, isMobi
     soundFx.playHover();
     setIsBursting(true);
 
-    // Re-inflate soap bubble after burst animation
+    // Auto-restore after burst animation
     setTimeout(() => {
       setIsBursting(false);
-    }, 850);
+    }, 900);
   };
 
-  const animX = isMobile
-    ? [0, 14, -12, 10, 0]
-    : bubble.pathX;
-  const animY = isMobile
-    ? [0, -12, 14, -8, 0]
-    : bubble.pathY;
-  const animDuration = isMobile ? 8.5 : bubble.duration;
-
   return (
-    <div className="relative inline-flex items-center justify-center select-none">
-      {/* Radial Particle & Shockwave Burst */}
+    <div className="relative inline-flex items-center justify-center">
+      {/* Burst Particles */}
       <AnimatePresence>
         {isBursting && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
-            {/* Expanding Shockwave Ring */}
-            <motion.div
-              initial={{ scale: 0.5, opacity: 1 }}
-              animate={{ scale: 2.4, opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="absolute w-20 h-20 rounded-full border-2"
-              style={{
-                borderColor: bubble.color,
-                boxShadow: `0 0 20px ${bubble.glow}`
-              }}
-            />
-
-            {/* 10 Radial Iridescent Spark Particles */}
-            {Array.from({ length: 10 }).map((_, i) => {
-              const angle = (i * 36) * (Math.PI / 180);
-              const distance = 46 + (i % 3) * 16;
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+            {Array.from({ length: 6 }).map((_, i) => {
+              const angle = (i * 60) * (Math.PI / 180);
+              const distance = 46;
               const x = Math.cos(angle) * distance;
               const y = Math.sin(angle) * distance;
 
               return (
                 <motion.span
                   key={i}
-                  initial={{ x: 0, y: 0, scale: 1.5, opacity: 1 }}
+                  initial={{ x: 0, y: 0, scale: 1.2, opacity: 1 }}
                   animate={{ x, y, scale: 0, opacity: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute w-2.5 h-2.5 rounded-full"
+                  className="absolute w-2 h-2 rounded-full"
                   style={{
                     backgroundColor: bubble.color,
-                    boxShadow: `0 0 12px ${bubble.glow}`
+                    boxShadow: `0 0 10px ${bubble.glow}`
                   }}
                 />
               );
@@ -173,88 +197,47 @@ const FloatingBubbleSphere: React.FC<InteractiveBubbleProps> = ({ bubble, isMobi
         )}
       </AnimatePresence>
 
-      {/* CONTINUOUS AUTONOMOUS WANDERING MOTION OVER THE SCREEN SPACE */}
-      <motion.div
+      {/* Bubble Pill */}
+      <motion.button
+        onClick={handleClick}
         animate={
           isBursting
             ? { scale: 0, opacity: 0 }
             : {
-                x: animX,
-                y: animY,
-                rotate: bubble.rotate,
                 scale: 1,
-                opacity: 1
+                opacity: 1,
+                y: [0, -8, 0]
               }
         }
         transition={
           isBursting
-            ? { duration: 0.2, ease: 'easeIn' }
+            ? { duration: 0.25 }
             : {
-                x: {
-                  duration: animDuration,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                },
                 y: {
-                  duration: animDuration * 0.9,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                },
-                rotate: {
-                  duration: animDuration * 1.1,
+                  duration: bubble.floatDuration,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
                 scale: { type: 'spring', stiffness: 400, damping: 15 }
               }
         }
-        whileHover={{ scale: 1.18 }}
-        whileTap={{ scale: 0.92 }}
-        onClick={handleClick}
-        className="soap-bubble"
-        style={
-          {
-            '--wobble-duration': bubble.wobbleDuration,
-            '--bubble-glow': bubble.glow
-          } as React.CSSProperties
-        }
-        title={`Click to pop ${bubble.name}`}
-        aria-label={`Interactive soap bubble: ${bubble.name}`}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="group relative px-4 py-2 rounded-full bg-[#0C0E15]/90 border border-white/10 hover:border-white/30 backdrop-blur-md shadow-lg cursor-pointer flex items-center gap-2 select-none transition-colors"
+        style={{
+          boxShadow: `0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 15px -3px ${bubble.glow}`
+        }}
+        title={`Click to burst ${bubble.name}`}
+        aria-label={`Skill node: ${bubble.name}`}
       >
-        {/* 1. Rotating Iridescent Chromatic Sheen with hollowed transparent center */}
-        <div className="soap-bubble-iridescence" />
-
-        {/* 2. Top-Left Primary Curved Specular Highlight Arc */}
-        <div className="soap-bubble-arc" />
-
-        {/* 3. Pinpoint Specular Star Glint */}
-        <div className="soap-bubble-glint" />
-
-        {/* 4. Secondary Bottom-Right Curved Reflection */}
-        <div className="soap-bubble-secondary-arc" />
-
-        {/* 5. Bottom Caustic Pool */}
-        <div
-          className="soap-bubble-caustic"
-          style={{
-            background: `radial-gradient(ellipse at center, ${bubble.color}45 0%, rgba(155, 92, 255, 0.2) 50%, transparent 80%)`
-          }}
+        <span
+          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
+          style={{ backgroundColor: bubble.color, boxShadow: `0 0 8px ${bubble.color}` }}
         />
-
-        {/* 6. Crisp, Ultra-Readable Nameplate inside the Bubble */}
-        <div className="soap-bubble-content">
-          <span className="soap-bubble-title">
-            {bubble.name}
-          </span>
-          <span
-            className="soap-bubble-dot"
-            style={{
-              backgroundColor: bubble.color,
-              boxShadow: `0 0 8px ${bubble.color}`
-            }}
-          />
-        </div>
-      </motion.div>
+        <span className="font-mono text-xs font-semibold text-[#F5F5FA] group-hover:text-white tracking-wide whitespace-nowrap">
+          {bubble.name}
+        </span>
+      </motion.button>
     </div>
   );
 };
@@ -274,8 +257,8 @@ export const PhotoRevealSection: React.FC = () => {
       id="persona-card"
       className="relative py-16 sm:py-24 bg-[#08090D] overflow-hidden border-t border-b border-white/[0.06]"
     >
-      {/* Ambient background lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#9B5CFF]/10 via-[#00D9FF]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      {/* Background cyber ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-[#9B5CFF]/10 via-[#00D9FF]/10 to-transparent rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
         
@@ -289,34 +272,34 @@ export const PhotoRevealSection: React.FC = () => {
             Interactive Neural Persona
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-[#9095A6] font-sans leading-relaxed">
-            Hover over the card to decrypt identity photo. Click orbiting soap bubbles to pop them.
+            Hover over the cyber card to decrypt identity photo. Click skill nodes to test particle burst kinetics.
           </p>
         </div>
 
-        {/* Central Stage: Photo Card in Center with Autonomous Soap Bubbles Roaming Dynamically Over the Screen */}
-        <div className="relative flex items-center justify-center w-full max-w-5xl min-h-[520px] sm:min-h-[580px] lg:min-h-[640px]">
+        {/* Central Stage: Photo Card surrounded by Interactive Skill Bubbles */}
+        <div className="relative flex items-center justify-center w-full max-w-4xl min-h-[460px] sm:min-h-[520px]">
           
-          {/* Desktop Floating Soap Bubbles — freely roaming vast screen trajectories without colliding with the card */}
+          {/* Desktop Skill Bubbles (Positioned organically in 3D space around the card) */}
           <div className="hidden md:block absolute inset-0 pointer-events-none">
             {SKILL_BUBBLES.map((bubble) => (
               <div
                 key={bubble.id}
-                className={`absolute ${bubble.desktopPos} pointer-events-auto z-20`}
+                className={`absolute ${bubble.positionDesktop} pointer-events-auto z-20`}
               >
-                <FloatingBubbleSphere bubble={bubble} />
+                <InteractiveBubble bubble={bubble} />
               </div>
             ))}
           </div>
 
-          {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION (CENTER STAGE) */}
+          {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION */}
           <div
-            className="photo-card-wrapper z-10 my-4"
+            className="photo-card-wrapper z-10"
             onMouseEnter={handleFirstHover}
             onTouchStart={handleFirstHover}
           >
             <div className="container noselect">
               <div className="canvas">
-                {/* 25 3D Tracking Quadrants for Perspective Tilt */}
+                {/* All 25 3D Tracking Quadrants for Full Fluid Perspective Tilt */}
                 <div className="tracker tr-1" />
                 <div className="tracker tr-2" />
                 <div className="tracker tr-3" />
@@ -403,21 +386,15 @@ export const PhotoRevealSection: React.FC = () => {
 
         </div>
 
-        {/* Mobile Floating Bubbles (Arranged cleanly with organic drift and zero overlap on smaller screens) */}
-        <div className="md:hidden flex flex-col items-center gap-6 mt-6 w-full max-w-sm">
-          <div className="flex justify-center gap-3">
-            {SKILL_BUBBLES.slice(0, 3).map((bubble) => (
-              <FloatingBubbleSphere key={bubble.id} bubble={bubble} isMobile={true} />
-            ))}
-          </div>
-          <div className="flex justify-center gap-3">
-            {SKILL_BUBBLES.slice(3, 6).map((bubble) => (
-              <FloatingBubbleSphere key={bubble.id} bubble={bubble} isMobile={true} />
-            ))}
-          </div>
+        {/* Mobile Skill Bubbles (Flexibly displayed below card on small viewports) */}
+        <div className="md:hidden flex flex-wrap items-center justify-center gap-2 mt-8 w-full max-w-md">
+          {SKILL_BUBBLES.map((bubble) => (
+            <InteractiveBubble key={bubble.id} bubble={bubble} />
+          ))}
         </div>
 
       </div>
     </section>
   );
 };
+
