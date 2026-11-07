@@ -86,7 +86,7 @@ export const Hero: React.FC = () => {
               variants={letterContainerVariants}
               initial="hidden"
               animate="visible"
-              className="font-display font-black tracking-[-0.035em] uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.92]"
+              className="font-name font-extrabold tracking-tight uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.92]"
             >
               {/* First Name: PRATEEK */}
               <div className="overflow-hidden flex items-center pointer-events-none">

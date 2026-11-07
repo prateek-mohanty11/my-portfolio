@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
+import { PhotoRevealSection } from './components/sections/PhotoRevealSection';
 import { About } from './components/sections/About';
 import { SkillsTree } from './components/sections/SkillsTree';
 import { Projects } from './components/sections/Projects';
@@ -29,6 +30,7 @@ export function App() {
       {/* Main Interactive Flow */}
       <main>
         <Hero />
+        <PhotoRevealSection />
         <About />
         <SkillsTree />
         <Projects />
