@@ -15,14 +15,14 @@ interface SkillBubbleData {
 }
 
 const SKILL_BUBBLES: SkillBubbleData[] = [
-  // Left Side Constellation (7 Skills)
+  // Left Side Constellation (7 Skills — closely framing the card)
   {
     id: 'python',
     name: 'Python',
     color: '#00D9FF',
     glow: 'rgba(0, 217, 255, 0.5)',
     floatDuration: 3.2,
-    positionDesktop: 'top-2 -left-28 lg:-left-44',
+    positionDesktop: 'top-[-18px] right-full mr-3',
     positionMobile: ''
   },
   {
@@ -31,7 +31,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#3178C6',
     glow: 'rgba(49, 120, 198, 0.5)',
     floatDuration: 3.7,
-    positionDesktop: 'top-16 -left-60 lg:-left-76',
+    positionDesktop: 'top-[32px] right-full mr-7 lg:mr-9',
     positionMobile: ''
   },
   {
@@ -40,7 +40,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#9B5CFF',
     glow: 'rgba(155, 92, 255, 0.5)',
     floatDuration: 4.1,
-    positionDesktop: 'top-[36%] -left-32 lg:-left-52',
+    positionDesktop: 'top-[84px] right-full mr-3',
     positionMobile: ''
   },
   {
@@ -49,7 +49,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#A855F7',
     glow: 'rgba(168, 85, 247, 0.5)',
     floatDuration: 3.5,
-    positionDesktop: 'top-[52%] -left-64 lg:-left-80',
+    positionDesktop: 'top-[138px] right-full mr-8 lg:mr-10',
     positionMobile: ''
   },
   {
@@ -58,7 +58,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#10B981',
     glow: 'rgba(16, 185, 129, 0.5)',
     floatDuration: 3.9,
-    positionDesktop: 'top-[68%] -left-28 lg:-left-44',
+    positionDesktop: 'top-[192px] right-full mr-3',
     positionMobile: ''
   },
   {
@@ -67,7 +67,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#00FFAA',
     glow: 'rgba(0, 255, 170, 0.5)',
     floatDuration: 3.4,
-    positionDesktop: 'bottom-6 -left-56 lg:-left-72',
+    positionDesktop: 'top-[246px] right-full mr-7 lg:mr-9',
     positionMobile: ''
   },
   {
@@ -76,18 +76,18 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#6366F1',
     glow: 'rgba(99, 102, 241, 0.5)',
     floatDuration: 4.3,
-    positionDesktop: 'bottom-[-16px] -left-16 lg:-left-32',
+    positionDesktop: 'bottom-[-16px] right-full mr-3',
     positionMobile: ''
   },
 
-  // Right Side Constellation (7 Skills)
+  // Right Side Constellation (7 Skills — closely framing the card)
   {
     id: 'react',
     name: 'React',
     color: '#38BDF8',
     glow: 'rgba(56, 189, 248, 0.5)',
     floatDuration: 3.3,
-    positionDesktop: 'top-2 -right-28 lg:-right-44',
+    positionDesktop: 'top-[-18px] left-full ml-3',
     positionMobile: ''
   },
   {
@@ -96,7 +96,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#06B6D4',
     glow: 'rgba(6, 182, 212, 0.5)',
     floatDuration: 3.8,
-    positionDesktop: 'top-16 -right-60 lg:-right-76',
+    positionDesktop: 'top-[32px] left-full ml-7 lg:ml-9',
     positionMobile: ''
   },
   {
@@ -105,7 +105,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#EC4899',
     glow: 'rgba(236, 72, 153, 0.5)',
     floatDuration: 4.2,
-    positionDesktop: 'top-[36%] -right-32 lg:-right-52',
+    positionDesktop: 'top-[84px] left-full ml-3',
     positionMobile: ''
   },
   {
@@ -114,7 +114,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#F43F5E',
     glow: 'rgba(244, 63, 94, 0.5)',
     floatDuration: 3.6,
-    positionDesktop: 'top-[52%] -right-64 lg:-right-80',
+    positionDesktop: 'top-[138px] left-full ml-8 lg:ml-10',
     positionMobile: ''
   },
   {
@@ -123,7 +123,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#10E7B2',
     glow: 'rgba(16, 231, 178, 0.5)',
     floatDuration: 4.0,
-    positionDesktop: 'top-[68%] -right-28 lg:-right-44',
+    positionDesktop: 'top-[192px] left-full ml-3',
     positionMobile: ''
   },
   {
@@ -132,7 +132,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#F59E0B',
     glow: 'rgba(245, 158, 11, 0.5)',
     floatDuration: 3.5,
-    positionDesktop: 'bottom-6 -right-56 lg:-right-72',
+    positionDesktop: 'top-[246px] left-full ml-7 lg:ml-9',
     positionMobile: ''
   },
   {
@@ -141,7 +141,7 @@ const SKILL_BUBBLES: SkillBubbleData[] = [
     color: '#60A5FA',
     glow: 'rgba(96, 165, 250, 0.5)',
     floatDuration: 4.4,
-    positionDesktop: 'bottom-[-16px] -right-16 lg:-right-32',
+    positionDesktop: 'bottom-[-16px] left-full ml-3',
     positionMobile: ''
   }
 ];
@@ -276,27 +276,29 @@ export const PhotoRevealSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Central Stage: Photo Card surrounded by Interactive Skill Bubbles */}
-        <div className="relative flex items-center justify-center w-full max-w-4xl min-h-[460px] sm:min-h-[520px]">
+        {/* Central Stage: Photo Card closely framed by Interactive Skill Bubbles */}
+        <div className="relative flex items-center justify-center w-full min-h-[460px] sm:min-h-[520px]">
           
-          {/* Desktop Skill Bubbles (Positioned organically in 3D space around the card) */}
-          <div className="hidden md:block absolute inset-0 pointer-events-none">
-            {SKILL_BUBBLES.map((bubble) => (
-              <div
-                key={bubble.id}
-                className={`absolute ${bubble.positionDesktop} pointer-events-auto z-20`}
-              >
-                <InteractiveBubble bubble={bubble} />
-              </div>
-            ))}
-          </div>
+          {/* Card Perimeter Anchor: Desktop bubbles are positioned relative to the card's exact perimeter */}
+          <div className="relative">
+            {/* Desktop Skill Bubbles (Positioned snugly around the card) */}
+            <div className="hidden md:block absolute inset-0 pointer-events-none">
+              {SKILL_BUBBLES.map((bubble) => (
+                <div
+                  key={bubble.id}
+                  className={`absolute ${bubble.positionDesktop} pointer-events-auto z-20 whitespace-nowrap`}
+                >
+                  <InteractiveBubble bubble={bubble} />
+                </div>
+              ))}
+            </div>
 
-          {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION */}
-          <div
-            className="photo-card-wrapper z-10"
-            onMouseEnter={handleFirstHover}
-            onTouchStart={handleFirstHover}
-          >
+            {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION */}
+            <div
+              className="photo-card-wrapper z-10"
+              onMouseEnter={handleFirstHover}
+              onTouchStart={handleFirstHover}
+            >
             <div className="container noselect">
               <div className="canvas">
                 {/* All 25 3D Tracking Quadrants for Full Fluid Perspective Tilt */}
@@ -383,6 +385,7 @@ export const PhotoRevealSection: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
 
         </div>
 
