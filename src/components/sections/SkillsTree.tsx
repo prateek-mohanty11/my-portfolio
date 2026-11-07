@@ -4,12 +4,23 @@ import { Network, ChevronRight, Layers } from 'lucide-react';
 import { skillBranches, type SkillItem } from '../../data/skills';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Modal } from '../ui/Modal';
+import { soundFx } from '../../utils/audio';
 
 export const SkillsTree: React.FC = () => {
   const [activeBranchId, setActiveBranchId] = useState<string>(skillBranches[0].id);
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
 
   const activeBranch = skillBranches.find(b => b.id === activeBranchId) || skillBranches[0];
+
+  const handleSelectBranch = (branchId: string) => {
+    soundFx.playSelect();
+    setActiveBranchId(branchId);
+  };
+
+  const handleSelectSkill = (skill: SkillItem) => {
+    soundFx.playSelect();
+    setSelectedSkill(skill);
+  };
 
   return (
     <section id="skills" className="relative py-24 sm:py-32 px-4 sm:px-6 md:px-8 bg-[#08090D] overflow-hidden">
@@ -26,13 +37,14 @@ export const SkillsTree: React.FC = () => {
         />
 
         {/* Branch Selector Tabs / Nodes */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
           {skillBranches.map((branch) => {
             const isSelected = activeBranchId === branch.id;
             return (
               <button
                 key={branch.id}
-                onClick={() => setActiveBranchId(branch.id)}
+                onClick={() => handleSelectBranch(branch.id)}
+                onMouseEnter={() => soundFx.playHover()}
                 className={`relative p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 border ${
                   isSelected
                     ? 'bg-[#151824] shadow-xl'
@@ -70,6 +82,28 @@ export const SkillsTree: React.FC = () => {
           })}
         </div>
 
+        {/* Dynamic SVG Branching Neural Connecting Lines */}
+        <div className="hidden lg:block relative w-full h-10 overflow-hidden pointer-events-none mb-4">
+          <svg className="w-full h-full" viewBox="0 0 1000 40" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="neuralGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#9B5CFF" stopOpacity="0.4" />
+                <stop offset="50%" stopColor={activeBranch.color} stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#00D9FF" stopOpacity="0.4" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 120 5 C 300 35, 500 35, 880 5"
+              fill="none"
+              stroke="url(#neuralGrad)"
+              strokeWidth="2"
+              strokeDasharray="8 6"
+              className="animate-pulse"
+            />
+            <circle cx="500" cy="35" r="4" fill={activeBranch.color} />
+          </svg>
+        </div>
+
         {/* INTERACTIVE TREE VISUALIZER CANVAS */}
         <div className="relative rounded-3xl bg-[#10121A]/90 border border-white/10 p-6 sm:p-10 backdrop-blur-xl overflow-hidden min-h-[480px] flex flex-col justify-between">
           
@@ -87,7 +121,7 @@ export const SkillsTree: React.FC = () => {
                   <span className="text-[11px] font-mono text-[#00D9FF] uppercase tracking-wider">
                     ROOT NODE
                   </span>
-                  <span className="text-xs font-mono text-[#A3A8B8]">• Active:</span>
+                  <span className="text-xs font-mono text-[#A3A8B8]">• Active Branch:</span>
                   <span className="text-xs font-mono font-semibold" style={{ color: activeBranch.color }}>
                     {activeBranch.name}
                   </span>
@@ -122,7 +156,8 @@ export const SkillsTree: React.FC = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.06, duration: 0.3 }}
                     whileHover={{ y: -4 }}
-                    onClick={() => setSelectedSkill(skill)}
+                    onMouseEnter={() => soundFx.playHover()}
+                    onClick={() => handleSelectSkill(skill)}
                     className="group relative cursor-pointer p-5 rounded-2xl bg-[#151824]/90 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-md glow-card"
                     style={{
                       borderColor: 'rgba(255, 255, 255, 0.08)',

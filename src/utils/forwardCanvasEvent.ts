@@ -41,3 +41,4 @@ export const forwardToCanvas = (e: React.PointerEvent | React.MouseEvent) => {
     // Graceful fallback
   }
 };
+
