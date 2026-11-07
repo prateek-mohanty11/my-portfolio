@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { ArrowDown, Code2, Sparkles, Cuboid, Box } from 'lucide-react';
+import { ArrowDown, Code2, Sparkles } from 'lucide-react';
 import { profileData } from '../../data/profile';
 import { SplineHero } from '../spline/SplineHero';
-import { Interactive3DBoxes } from '../three/Interactive3DBoxes';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
 import { soundFx } from '../../utils/audio';
 
@@ -40,35 +39,30 @@ const letterVariants: Variants = {
 };
 
 export const Hero: React.FC = () => {
-  const [sceneMode, setSceneMode] = useState<'spline' | 'boxes-code'>('spline');
-
-  const toggleSceneMode = (mode: 'spline' | 'boxes-code') => {
-    soundFx.playSelect();
-    setSceneMode(mode);
-  };
-
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center pt-32 sm:pt-36 md:pt-40 pb-20 px-4 sm:px-6 md:px-8 overflow-hidden bg-cyber-grid"
     >
-      {/* Ambient background glow orbs */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#9B5CFF]/15 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#00D9FF]/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* IMMERSIVE 3D BACKGROUND (Interactive Canvas) */}
+      <SplineHero className="z-0 pointer-events-auto" />
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-        
-        {/* LEFT COLUMN: Animated Identity & Typography */}
-        <div className="lg:col-span-7 flex flex-col justify-center text-left">
+      {/* Ambient background glow orbs */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#9B5CFF]/15 rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#00D9FF]/10 rounded-full blur-[140px] pointer-events-none z-0" />
+
+      {/* FOREGROUND HERO CONTENT (Floats seamlessly over the 3D background) */}
+      <div className="max-w-7xl mx-auto w-full relative z-10 pointer-events-none flex flex-col justify-center text-left">
+        <div className="max-w-3xl">
           
           {/* Eyebrow Label: HELLO, I'M */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="flex items-center gap-2 mb-4"
+            className="flex items-center gap-2 mb-4 pointer-events-auto"
           >
-            <span className="px-3 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-[#151824] border border-[#9B5CFF]/30 text-[#00D9FF] flex items-center gap-2 shadow-[0_0_15px_rgba(155,92,255,0.15)]">
+            <span className="px-3.5 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-[#151824]/90 backdrop-blur-md border border-[#9B5CFF]/30 text-[#00D9FF] flex items-center gap-2 shadow-[0_0_15px_rgba(155,92,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
               HELLO, I'M
             </span>
@@ -78,12 +72,12 @@ export const Hero: React.FC = () => {
           </motion.div>
 
           {/* SIGNATURE CINEMATIC NAME REVEAL */}
-          <div className="relative my-2 select-none" aria-label="Prateek Mohanty">
+          <div className="relative my-2 select-none pointer-events-auto" aria-label="Prateek Mohanty">
             <motion.h1
               variants={letterContainerVariants}
               initial="hidden"
               animate="visible"
-              className="font-display font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.98]"
+              className="font-display font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.96]"
             >
               {/* First Name: PRATEEK */}
               <div className="overflow-hidden flex items-center">
@@ -96,10 +90,10 @@ export const Hero: React.FC = () => {
                       y: -8,
                       scale: 1.1,
                       color: '#00D9FF',
-                      textShadow: '0 0 20px rgba(0, 217, 255, 0.7)',
+                      textShadow: '0 0 25px rgba(0, 217, 255, 0.8)',
                       transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
                     }}
-                    className="inline-block cursor-default text-[#F5F5FA] transition-colors"
+                    className="inline-block cursor-default text-[#F5F5FA] drop-shadow-lg transition-colors"
                   >
                     {char}
                   </motion.span>
@@ -117,10 +111,10 @@ export const Hero: React.FC = () => {
                       y: -8,
                       scale: 1.1,
                       color: '#9B5CFF',
-                      textShadow: '0 0 25px rgba(155, 92, 255, 0.8)',
+                      textShadow: '0 0 30px rgba(155, 92, 255, 0.9)',
                       transition: { type: 'spring' as const, stiffness: 400, damping: 10 }
                     }}
-                    className={`inline-block cursor-default transition-colors ${
+                    className={`inline-block cursor-default drop-shadow-lg transition-colors ${
                       char === '.' ? 'text-[#00D9FF]' : 'text-gradient-purple-cyan'
                     }`}
                   >
@@ -141,7 +135,7 @@ export const Hero: React.FC = () => {
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               style={{ originX: 0 }}
-              className="h-[2px] w-48 sm:w-64 bg-gradient-to-r from-[#9B5CFF] via-[#00D9FF] to-transparent mt-4"
+              className="h-[2px] w-48 sm:w-64 bg-gradient-to-r from-[#9B5CFF] via-[#00D9FF] to-transparent mt-4 shadow-[0_0_10px_#00D9FF]"
             />
           </div>
 
@@ -150,11 +144,11 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-6 mb-5"
+            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-6 mb-5 pointer-events-auto"
           >
             {profileData.headline.map((item, idx) => (
               <React.Fragment key={item}>
-                <span className="text-sm sm:text-base font-display font-medium text-[#F5F5FA] bg-[#151824]/90 px-3 py-1 rounded-lg border border-white/10 shadow-sm">
+                <span className="text-sm sm:text-base font-display font-medium text-[#F5F5FA] bg-[#10121A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/10 shadow-lg">
                   {item}
                 </span>
                 {idx < profileData.headline.length - 1 && (
@@ -169,7 +163,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="text-base sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-8 font-sans"
+            className="text-base sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-8 font-sans bg-[#08090D]/40 backdrop-blur-sm p-2 rounded-xl"
           >
             "Exploring intelligent technologies. Building meaningful digital experiences. Turning ideas into reality."
           </motion.p>
@@ -179,7 +173,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex flex-wrap items-center gap-4 mb-8"
+            className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto"
           >
             <a
               href="#projects"
@@ -193,7 +187,7 @@ export const Hero: React.FC = () => {
             <a
               href="#contact"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-[#F5F5FA] bg-[#10121A] border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-[#F5F5FA] bg-[#10121A]/90 backdrop-blur-md border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
             >
               <span>Let's Connect</span>
             </a>
@@ -204,7 +198,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.75 }}
-            className="flex items-center gap-4 text-[#A3A8B8]"
+            className="flex items-center gap-4 text-[#A3A8B8] pointer-events-auto"
           >
             <span className="text-xs font-mono uppercase tracking-wider text-[#A3A8B8]/70">
               Profiles:
@@ -216,7 +210,7 @@ export const Hero: React.FC = () => {
                 rel="noreferrer"
                 aria-label="GitHub Profile"
                 onMouseEnter={() => soundFx.playHover()}
-                className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
+                className="p-2.5 rounded-xl bg-[#10121A]/90 backdrop-blur-md border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
@@ -226,7 +220,7 @@ export const Hero: React.FC = () => {
                 rel="noreferrer"
                 aria-label="LinkedIn Profile"
                 onMouseEnter={() => soundFx.playHover()}
-                className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
+                className="p-2.5 rounded-xl bg-[#10121A]/90 backdrop-blur-md border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -236,7 +230,7 @@ export const Hero: React.FC = () => {
                 rel="noreferrer"
                 aria-label="LeetCode Profile"
                 onMouseEnter={() => soundFx.playHover()}
-                className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#9B5CFF] hover:border-[#9B5CFF]/40 hover:shadow-[0_0_12px_rgba(155,92,255,0.3)] transition-all"
+                className="p-2.5 rounded-xl bg-[#10121A]/90 backdrop-blur-md border border-white/10 text-[#F5F5FA] hover:text-[#9B5CFF] hover:border-[#9B5CFF]/40 hover:shadow-[0_0_12px_rgba(155,92,255,0.3)] transition-all"
               >
                 <Code2 className="w-4 h-4" />
               </a>
@@ -244,46 +238,6 @@ export const Hero: React.FC = () => {
           </motion.div>
 
         </div>
-
-        {/* RIGHT COLUMN: Spline 3D Scene (https://prod.spline.design/1cIJsy8miiNDXCYE/scene.splinecode) */}
-        <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center">
-          
-          {/* Subtle Scene Switcher Pill */}
-          <div className="mb-2 p-1 rounded-full bg-[#10121A]/80 border border-white/10 backdrop-blur-md flex items-center gap-1 z-20">
-            <button
-              onClick={() => toggleSceneMode('spline')}
-              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
-                sceneMode === 'spline'
-                  ? 'bg-[#151824] text-[#00D9FF] border border-[#00D9FF]/40 shadow-sm'
-                  : 'text-[#A3A8B8] hover:text-white'
-              }`}
-            >
-              <Cuboid className="w-3.5 h-3.5" />
-              <span>Spline 3D</span>
-            </button>
-            <button
-              onClick={() => toggleSceneMode('boxes-code')}
-              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
-                sceneMode === 'boxes-code'
-                  ? 'bg-[#151824] text-[#9B5CFF] border border-[#9B5CFF]/40 shadow-sm'
-                  : 'text-[#A3A8B8] hover:text-white'
-              }`}
-            >
-              <Box className="w-3.5 h-3.5" />
-              <span>3D Boxes</span>
-            </button>
-          </div>
-
-          {/* Active 3D Scene View */}
-          <div className="w-full">
-            {sceneMode === 'spline' ? (
-              <SplineHero />
-            ) : (
-              <Interactive3DBoxes />
-            )}
-          </div>
-        </div>
-
       </div>
 
       {/* Floating Scroll Down Indicator */}
@@ -291,7 +245,7 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.0, duration: 0.6 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[#A3A8B8]"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[#A3A8B8] z-10 pointer-events-none"
       >
         <span className="text-[10px] font-mono tracking-widest uppercase text-[#A3A8B8]/60">
           Scroll Down
