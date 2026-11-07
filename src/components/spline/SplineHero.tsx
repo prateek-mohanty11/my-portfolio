@@ -5,7 +5,7 @@ import { Loader2, Cuboid, ExternalLink } from 'lucide-react';
 // Lazy load the Spline canvas so that the Hero text and name typography render instantly
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
-const SCENE_URL = "https://prod.spline.design/VaFskeBrBPZK9w1v/scene.splinecode";
+const SCENE_URL = "https://prod.spline.design/1cIJsy8miiNDXCYE/scene.splinecode";
 
 export const SplineHero: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,12 +47,12 @@ export const SplineHero: React.FC = () => {
             Could not initialize WebGL canvas. You can inspect the interactive model directly on Spline.
           </p>
           <a
-            href="https://app.spline.design/community/file/a1f156f7-ef01-42d1-bf7b-5be1b7967b0a"
+            href="https://prod.spline.design/1cIJsy8miiNDXCYE/scene.splinecode"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono bg-[#151824] border border-[#00D9FF]/40 text-[#00D9FF] hover:border-[#00D9FF]"
           >
-            <span>View Scene on Spline</span>
+            <span>View Scene Source</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -80,7 +80,7 @@ export const SplineHero: React.FC = () => {
         </Suspense>
       )}
 
-      {/* Floating 3D Interaction Badge & Spline Attribution */}
+      {/* Floating 3D Interaction Badge */}
       <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-2 pointer-events-auto">
         <div className="px-2.5 py-1 rounded-full bg-[#10121A]/80 border border-white/10 backdrop-blur-md text-[10px] font-mono text-[#A3A8B8] flex items-center gap-1.5 shadow-lg">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-ping" />
@@ -90,4 +90,3 @@ export const SplineHero: React.FC = () => {
     </div>
   );
 };
-

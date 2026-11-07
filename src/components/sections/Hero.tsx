@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { ArrowDown, Code2, Sparkles, Box, Cuboid } from 'lucide-react';
+import { ArrowDown, Code2, Sparkles, Cuboid, Box } from 'lucide-react';
 import { profileData } from '../../data/profile';
-import { Interactive3DBoxes } from '../three/Interactive3DBoxes';
 import { SplineHero } from '../spline/SplineHero';
+import { Interactive3DBoxes } from '../three/Interactive3DBoxes';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
 import { soundFx } from '../../utils/audio';
 
@@ -40,9 +40,9 @@ const letterVariants: Variants = {
 };
 
 export const Hero: React.FC = () => {
-  const [sceneMode, setSceneMode] = useState<'boxes-code' | 'spline'>('boxes-code');
+  const [sceneMode, setSceneMode] = useState<'spline' | 'boxes-code'>('spline');
 
-  const toggleSceneMode = (mode: 'boxes-code' | 'spline') => {
+  const toggleSceneMode = (mode: 'spline' | 'boxes-code') => {
     soundFx.playSelect();
     setSceneMode(mode);
   };
@@ -245,41 +245,41 @@ export const Hero: React.FC = () => {
 
         </div>
 
-        {/* RIGHT COLUMN: Code-based Interactive 3D Boxes (Hover Effect without Texts) */}
+        {/* RIGHT COLUMN: Spline 3D Scene (https://prod.spline.design/1cIJsy8miiNDXCYE/scene.splinecode) */}
         <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center">
           
-          {/* Subtle Scene Switcher Pill (3D Boxes Code vs Spline) */}
+          {/* Subtle Scene Switcher Pill */}
           <div className="mb-2 p-1 rounded-full bg-[#10121A]/80 border border-white/10 backdrop-blur-md flex items-center gap-1 z-20">
-            <button
-              onClick={() => toggleSceneMode('boxes-code')}
-              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
-                sceneMode === 'boxes-code'
-                  ? 'bg-[#151824] text-[#00D9FF] border border-[#00D9FF]/40 shadow-sm'
-                  : 'text-[#A3A8B8] hover:text-white'
-              }`}
-            >
-              <Box className="w-3.5 h-3.5" />
-              <span>3D Boxes (Code)</span>
-            </button>
             <button
               onClick={() => toggleSceneMode('spline')}
               className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
                 sceneMode === 'spline'
-                  ? 'bg-[#151824] text-[#9B5CFF] border border-[#9B5CFF]/40 shadow-sm'
+                  ? 'bg-[#151824] text-[#00D9FF] border border-[#00D9FF]/40 shadow-sm'
                   : 'text-[#A3A8B8] hover:text-white'
               }`}
             >
               <Cuboid className="w-3.5 h-3.5" />
-              <span>Spline Scene</span>
+              <span>Spline 3D</span>
+            </button>
+            <button
+              onClick={() => toggleSceneMode('boxes-code')}
+              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
+                sceneMode === 'boxes-code'
+                  ? 'bg-[#151824] text-[#9B5CFF] border border-[#9B5CFF]/40 shadow-sm'
+                  : 'text-[#A3A8B8] hover:text-white'
+              }`}
+            >
+              <Box className="w-3.5 h-3.5" />
+              <span>3D Boxes</span>
             </button>
           </div>
 
-          {/* 3D Scene Container */}
+          {/* Active 3D Scene View */}
           <div className="w-full">
-            {sceneMode === 'boxes-code' ? (
-              <Interactive3DBoxes />
-            ) : (
+            {sceneMode === 'spline' ? (
               <SplineHero />
+            ) : (
+              <Interactive3DBoxes />
             )}
           </div>
         </div>

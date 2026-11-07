@@ -94,3 +94,4 @@ class SoundController {
 }
 
 export const soundFx = new SoundController();
+
