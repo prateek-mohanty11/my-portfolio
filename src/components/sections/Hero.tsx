@@ -42,9 +42,9 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-32 sm:pt-36 md:pt-40 pb-20 px-4 sm:px-6 md:px-8 overflow-hidden bg-cyber-grid"
+      className="relative min-h-[100svh] flex items-center justify-center pt-28 sm:pt-36 md:pt-40 pb-16 px-4 sm:px-6 md:px-8 overflow-hidden bg-cyber-grid"
     >
-      {/* IMMERSIVE 3D BACKGROUND (Interactive Canvas) */}
+      {/* IMMERSIVE 3D BACKGROUND (Interactive Canvas, Full-Bleed & Enlarged) */}
       <SplineHero className="z-0 pointer-events-auto" />
 
       {/* Ambient background glow orbs */}
@@ -60,7 +60,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="flex items-center gap-2 mb-4 pointer-events-auto"
+            className="flex items-center gap-2 mb-3 sm:mb-4 pointer-events-auto"
           >
             <span className="px-3.5 py-1 rounded-full text-xs font-mono tracking-widest uppercase bg-[#151824]/90 backdrop-blur-md border border-[#9B5CFF]/30 text-[#00D9FF] flex items-center gap-2 shadow-[0_0_15px_rgba(155,92,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
@@ -144,11 +144,11 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-6 mb-5 pointer-events-auto"
+            className="flex flex-wrap items-center gap-2 sm:gap-3 mt-5 sm:mt-6 mb-4 sm:mb-5 pointer-events-auto"
           >
             {profileData.headline.map((item, idx) => (
               <React.Fragment key={item}>
-                <span className="text-sm sm:text-base font-display font-medium text-[#F5F5FA] bg-[#10121A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/10 shadow-lg">
+                <span className="text-xs sm:text-base font-display font-medium text-[#F5F5FA] bg-[#10121A]/85 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-xl border border-white/10 shadow-lg">
                   {item}
                 </span>
                 {idx < profileData.headline.length - 1 && (
@@ -163,7 +163,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="text-base sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-8 font-sans bg-[#08090D]/40 backdrop-blur-sm p-2 rounded-xl"
+            className="text-sm sm:text-lg text-[#A3A8B8] max-w-xl leading-relaxed mb-6 sm:mb-8 font-sans bg-[#08090D]/50 backdrop-blur-sm p-2 sm:p-2.5 rounded-xl border border-white/5"
           >
             "Exploring intelligent technologies. Building meaningful digital experiences. Turning ideas into reality."
           </motion.p>
@@ -173,12 +173,12 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.65 }}
-            className="flex flex-wrap items-center gap-4 mb-8 pointer-events-auto"
+            className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6 sm:mb-8 pointer-events-auto"
           >
             <a
               href="#projects"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_25px_rgba(155,92,255,0.4)] transition-all transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_25px_rgba(155,92,255,0.4)] transition-all transform hover:-translate-y-0.5"
             >
               <Sparkles className="w-4 h-4 text-[#00D9FF]" />
               <span>Explore My Work</span>
@@ -187,7 +187,7 @@ export const Hero: React.FC = () => {
             <a
               href="#contact"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-[#F5F5FA] bg-[#10121A]/90 backdrop-blur-md border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-display font-semibold text-xs sm:text-sm text-[#F5F5FA] bg-[#10121A]/90 backdrop-blur-md border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
             >
               <span>Let's Connect</span>
             </a>
@@ -198,7 +198,7 @@ export const Hero: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.75 }}
-            className="flex items-center gap-4 text-[#A3A8B8] pointer-events-auto"
+            className="flex items-center gap-3 sm:gap-4 text-[#A3A8B8] pointer-events-auto"
           >
             <span className="text-xs font-mono uppercase tracking-wider text-[#A3A8B8]/70">
               Profiles:
@@ -245,7 +245,7 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.0, duration: 0.6 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[#A3A8B8] z-10 pointer-events-none"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[#A3A8B8] z-10 pointer-events-none"
       >
         <span className="text-[10px] font-mono tracking-widest uppercase text-[#A3A8B8]/60">
           Scroll Down
