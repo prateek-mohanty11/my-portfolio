@@ -10,139 +10,170 @@ interface SkillBubbleData {
   color: string;
   glow: string;
   floatDuration: number;
-  positionDesktop: string;
-  positionMobile: string;
+  floatDelay: number;
+  floatX: number;
+  floatY: number;
+  // Offset in px from the center of the photo card (desktop & tablet)
+  desktopOffset: { x: number; y: number };
 }
 
 const SKILL_BUBBLES: SkillBubbleData[] = [
-  // Left Side Constellation (7 Skills)
+  // --- Left Side Constellation (7 Skills — staggered inner & outer orbital nodes) ---
   {
     id: 'python',
     name: 'Python',
     color: '#00D9FF',
-    glow: 'rgba(0, 217, 255, 0.5)',
-    floatDuration: 3.2,
-    positionDesktop: 'top-2 -left-28 lg:-left-44',
-    positionMobile: ''
+    glow: 'rgba(0, 217, 255, 0.55)',
+    floatDuration: 3.4,
+    floatDelay: 0.2,
+    floatX: 3,
+    floatY: -7,
+    desktopOffset: { x: -175, y: -150 } // Inner upper-left shoulder (hugging card)
   },
   {
     id: 'ts',
     name: 'TypeScript',
     color: '#3178C6',
-    glow: 'rgba(49, 120, 198, 0.5)',
-    floatDuration: 3.7,
-    positionDesktop: 'top-16 -left-60 lg:-left-76',
-    positionMobile: ''
+    glow: 'rgba(49, 120, 198, 0.55)',
+    floatDuration: 4.1,
+    floatDelay: 0.8,
+    floatX: -4,
+    floatY: -9,
+    desktopOffset: { x: -250, y: -200 } // Outer upper-left satellite (depth layer)
   },
   {
     id: 'ml',
     name: 'Machine Learning',
     color: '#9B5CFF',
-    glow: 'rgba(155, 92, 255, 0.5)',
-    floatDuration: 4.1,
-    positionDesktop: 'top-[36%] -left-32 lg:-left-52',
-    positionMobile: ''
+    glow: 'rgba(155, 92, 255, 0.55)',
+    floatDuration: 3.8,
+    floatDelay: 0.4,
+    floatX: 4,
+    floatY: -8,
+    desktopOffset: { x: -210, y: -80 } // Inner mid-upper left (close to card edge)
   },
   {
     id: 'nlp',
     name: 'NLP',
     color: '#A855F7',
-    glow: 'rgba(168, 85, 247, 0.5)',
-    floatDuration: 3.5,
-    positionDesktop: 'top-[52%] -left-64 lg:-left-80',
-    positionMobile: ''
+    glow: 'rgba(168, 85, 247, 0.55)',
+    floatDuration: 3.6,
+    floatDelay: 1.2,
+    floatX: -3,
+    floatY: -7,
+    desktopOffset: { x: -260, y: -15 } // Outer mid-left satellite (depth layer)
   },
   {
     id: 'cv',
     name: 'Computer Vision',
     color: '#10B981',
-    glow: 'rgba(16, 185, 129, 0.5)',
-    floatDuration: 3.9,
-    positionDesktop: 'top-[68%] -left-28 lg:-left-44',
-    positionMobile: ''
+    glow: 'rgba(16, 185, 129, 0.55)',
+    floatDuration: 4.2,
+    floatDelay: 0.5,
+    floatX: 3,
+    floatY: -9,
+    desktopOffset: { x: -215, y: 55 } // Inner mid-lower left (close to card edge)
   },
   {
     id: 'dl',
     name: 'Deep Learning',
     color: '#00FFAA',
-    glow: 'rgba(0, 255, 170, 0.5)',
-    floatDuration: 3.4,
-    positionDesktop: 'bottom-6 -left-56 lg:-left-72',
-    positionMobile: ''
+    glow: 'rgba(0, 255, 170, 0.55)',
+    floatDuration: 3.9,
+    floatDelay: 0.9,
+    floatX: -4,
+    floatY: -8,
+    desktopOffset: { x: -255, y: 130 } // Outer lower-left satellite (depth layer)
   },
   {
     id: 'numpy',
     name: 'NumPy & Pandas',
     color: '#6366F1',
-    glow: 'rgba(99, 102, 241, 0.5)',
-    floatDuration: 4.3,
-    positionDesktop: 'bottom-[-16px] -left-16 lg:-left-32',
-    positionMobile: ''
+    glow: 'rgba(99, 102, 241, 0.55)',
+    floatDuration: 4.4,
+    floatDelay: 1.4,
+    floatX: 3,
+    floatY: -8,
+    desktopOffset: { x: -160, y: 195 } // Inner bottom-left under-flank (framing card)
   },
 
-  // Right Side Constellation (7 Skills)
+  // --- Right Side Constellation (7 Skills — asymmetric, distinct heights and depths) ---
   {
     id: 'react',
     name: 'React',
     color: '#38BDF8',
-    glow: 'rgba(56, 189, 248, 0.5)',
-    floatDuration: 3.3,
-    positionDesktop: 'top-2 -right-28 lg:-right-44',
-    positionMobile: ''
+    glow: 'rgba(56, 189, 248, 0.55)',
+    floatDuration: 3.5,
+    floatDelay: 0.2,
+    floatX: -3,
+    floatY: -7,
+    desktopOffset: { x: 165, y: -185 } // Inner upper-right shoulder (hugging card)
   },
   {
     id: 'tailwind',
     name: 'Tailwind CSS',
     color: '#06B6D4',
-    glow: 'rgba(6, 182, 212, 0.5)',
-    floatDuration: 3.8,
-    positionDesktop: 'top-16 -right-60 lg:-right-76',
-    positionMobile: ''
+    glow: 'rgba(6, 182, 212, 0.55)',
+    floatDuration: 4.0,
+    floatDelay: 0.8,
+    floatX: 4,
+    floatY: -9,
+    desktopOffset: { x: 195, y: -120 } // Inner upper-right flank (close to card)
   },
   {
     id: 'uiux',
     name: 'UI/UX Design',
     color: '#EC4899',
-    glow: 'rgba(236, 72, 153, 0.5)',
-    floatDuration: 4.2,
-    positionDesktop: 'top-[36%] -right-32 lg:-right-52',
-    positionMobile: ''
+    glow: 'rgba(236, 72, 153, 0.55)',
+    floatDuration: 3.7,
+    floatDelay: 1.1,
+    floatX: -3,
+    floatY: -8,
+    desktopOffset: { x: 255, y: -50 } // Outer mid-upper right satellite (depth layer)
   },
   {
     id: 'figma',
     name: 'Figma',
     color: '#F43F5E',
-    glow: 'rgba(244, 63, 94, 0.5)',
+    glow: 'rgba(244, 63, 94, 0.55)',
     floatDuration: 3.6,
-    positionDesktop: 'top-[52%] -right-64 lg:-right-80',
-    positionMobile: ''
+    floatDelay: 0.3,
+    floatX: 3,
+    floatY: -7,
+    desktopOffset: { x: 185, y: 15 } // Inner mid-right flank (close to card)
   },
   {
     id: 'threejs',
     name: 'Three.js',
     color: '#10E7B2',
-    glow: 'rgba(16, 231, 178, 0.5)',
-    floatDuration: 4.0,
-    positionDesktop: 'top-[68%] -right-28 lg:-right-44',
-    positionMobile: ''
+    glow: 'rgba(16, 231, 178, 0.55)',
+    floatDuration: 4.3,
+    floatDelay: 0.6,
+    floatX: -4,
+    floatY: -9,
+    desktopOffset: { x: 245, y: 85 } // Outer mid-lower right satellite (depth layer)
   },
   {
     id: 'java',
     name: 'Java',
     color: '#F59E0B',
-    glow: 'rgba(245, 158, 11, 0.5)',
+    glow: 'rgba(245, 158, 11, 0.55)',
     floatDuration: 3.5,
-    positionDesktop: 'bottom-6 -right-56 lg:-right-72',
-    positionMobile: ''
+    floatDelay: 1.3,
+    floatX: 3,
+    floatY: -8,
+    desktopOffset: { x: 185, y: 150 } // Inner lower-right flank (close to card)
   },
   {
     id: 'cprog',
     name: 'C Programming',
     color: '#60A5FA',
-    glow: 'rgba(96, 165, 250, 0.5)',
-    floatDuration: 4.4,
-    positionDesktop: 'bottom-[-16px] -right-16 lg:-right-32',
-    positionMobile: ''
+    glow: 'rgba(96, 165, 250, 0.55)',
+    floatDuration: 4.1,
+    floatDelay: 1.0,
+    floatX: -3,
+    floatY: -8,
+    desktopOffset: { x: 185, y: 215 } // Inner bottom-right under-flank (framing card)
   }
 ];
 
@@ -206,7 +237,8 @@ const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
             : {
                 scale: 1,
                 opacity: 1,
-                y: [0, -8, 0]
+                y: [0, bubble.floatY, 0],
+                x: [0, bubble.floatX, 0]
               }
         }
         transition={
@@ -215,6 +247,13 @@ const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
             : {
                 y: {
                   duration: bubble.floatDuration,
+                  delay: bubble.floatDelay,
+                  repeat: Infinity,
+                  ease: 'easeInOut'
+                },
+                x: {
+                  duration: bubble.floatDuration * 1.15,
+                  delay: bubble.floatDelay,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 },
@@ -223,7 +262,7 @@ const InteractiveBubble: React.FC<InteractiveBubbleProps> = ({ bubble }) => {
         }
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="group relative px-4 py-2 rounded-full bg-[#0C0E15]/90 border border-white/10 hover:border-white/30 backdrop-blur-md shadow-lg cursor-pointer flex items-center gap-2 select-none transition-colors"
+        className="group relative px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#0C0E15]/90 border border-white/10 hover:border-white/30 backdrop-blur-md shadow-lg cursor-pointer flex items-center gap-2 select-none transition-colors"
         style={{
           boxShadow: `0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 0 15px -3px ${bubble.glow}`
         }}
@@ -276,19 +315,26 @@ export const PhotoRevealSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Central Stage: Photo Card surrounded by Interactive Skill Bubbles */}
-        <div className="relative flex items-center justify-center w-full max-w-4xl min-h-[460px] sm:min-h-[520px]">
+        {/* Central Stage: Photo Card closely framed by an organic orbital cloud of Skill Bubbles */}
+        <div className="relative flex items-center justify-center w-full min-h-[500px] sm:min-h-[540px] my-4 overflow-visible">
           
-          {/* Desktop Skill Bubbles (Positioned organically in 3D space around the card) */}
-          <div className="hidden md:block absolute inset-0 pointer-events-none">
-            {SKILL_BUBBLES.map((bubble) => (
-              <div
-                key={bubble.id}
-                className={`absolute ${bubble.positionDesktop} pointer-events-auto z-20`}
-              >
-                <InteractiveBubble bubble={bubble} />
-              </div>
-            ))}
+          {/* Desktop & Tablet Constellation Anchor — precisely centered on the 3D photo card */}
+          <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 pointer-events-none z-20">
+            <div className="relative w-0 h-0 scale-[0.88] lg:scale-100 transition-transform duration-300">
+              {SKILL_BUBBLES.map((bubble) => (
+                <div
+                  key={bubble.id}
+                  className="absolute pointer-events-auto whitespace-nowrap"
+                  style={{
+                    left: `${bubble.desktopOffset.x}px`,
+                    top: `${bubble.desktopOffset.y}px`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <InteractiveBubble bubble={bubble} />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* THE EXACT SUPPLIED PHOTO CARD IMPLEMENTATION */}
@@ -386,10 +432,23 @@ export const PhotoRevealSection: React.FC = () => {
 
         </div>
 
-        {/* Mobile Skill Bubbles (Flexibly displayed below card on small viewports) */}
-        <div className="md:hidden flex flex-wrap items-center justify-center gap-2 mt-8 w-full max-w-md">
-          {SKILL_BUBBLES.map((bubble) => (
-            <InteractiveBubble key={bubble.id} bubble={bubble} />
+        {/* Mobile Skill Bubbles (Organically distributed cloud with particle bursts on small viewports) */}
+        <div className="md:hidden flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mt-8 px-2 w-full max-w-lg">
+          {SKILL_BUBBLES.map((bubble, idx) => (
+            <div
+              key={bubble.id}
+              className={`transform transition-transform ${
+                idx % 4 === 0
+                  ? 'translate-y-1.5'
+                  : idx % 4 === 1
+                  ? '-translate-y-1'
+                  : idx % 4 === 2
+                  ? 'translate-y-0.5'
+                  : '-translate-y-1.5'
+              }`}
+            >
+              <InteractiveBubble bubble={bubble} />
+            </div>
           ))}
         </div>
 
