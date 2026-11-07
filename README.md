@@ -1,32 +1,91 @@
-# React + TypeScript + Vite
+# Prateek Mohanty — Premium 3D Interactive Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An award-winning caliber, immersive, interactive personal portfolio website built for **Prateek Mohanty** (Aspiring AI/ML Engineer, Creative Developer & UI/UX Designer).
 
-Currently, two official plugins are available:
+![Tech Stack](https://img.shields.io/badge/Stack-React_19_+_Vite_+_TypeScript_+_Tailwind_CSS-00D9FF?style=for-the-badge)
+![Spline 3D](https://img.shields.io/badge/3D-Spline_Runtime-9B5CFF?style=for-the-badge)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌟 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Cinematic Hero Typography Reveal**:
+   - Staggered character reveal with vertical translation and blur-to-sharp transitions.
+   - Electric purple (`#9B5CFF`) & Cyan (`#00D9FF`) gradients with animated periodic light sweep.
+   - Interactive hover mechanics per letter with magnetic cursor interaction.
+2. **Official Spline 3D Scene Integration**:
+   - Embeds Prateek's exact exported Spline 3D scene (`https://prod.spline.design/VaFskeBrBPZK9w1v/scene.splinecode`).
+   - Non-blocking asynchronous loading so typography renders instantaneously.
+   - Preserves all native mouse tilt, lighting, animations, and hover interactions.
+3. **Interactive Branching Skill Tree**:
+   - Central Root node: `MY TECH STACK`.
+   - 4 major branches: **AI & Machine Learning**, **Web Development**, **Programming**, and **UI/UX & Creative Design**.
+   - Clickable skill leaves with detailed application context dialogs (Zero fabricated percentages).
+4. **Featured Projects 3D Showcase**:
+   - **NeedSense AI**: Geospatial community intelligence platform with animated cluster telemetry feed.
+   - **SkillGapRadar**: Career intelligence platform with rotating radar sweep and skills vs. demand matrix.
+   - **LexiLab**: Interactive compiler learning platform with live syntax tokens and terminal output visualizer.
+   - Interactive 3D tilt, specular glare, and expandable architectural modal views.
+5. **Experience & Certifications Timeline**:
+   - Vertical illuminated timeline highlighting leadership at **Idea & Innovation Cell (IIC)**, **CTTC Odisha**, and **ApexPlanet Software**.
+6. **Milestones & Achievements**:
+   - Smart India Hackathon (SIH), Odisha Seva First Innovation Challenge (OSFIC), and College Club Event Honors.
+7. **Public GitHub & LeetCode Feeds**:
+   - Live public repositories and profile activity with graceful fallbacks.
+8. **Collaboration & Contact**:
+   - Verified direct email client launcher, clipboard copy feedback, and social channels.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🚀 Getting Started
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm or pnpm
+
+### Installation
+```bash
+npm install --legacy-peer-deps
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Run Locally (Development)
+```bash
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build for Production
+```bash
+npm run build
+```
+Generates production-ready static assets in the `dist/` directory.
+
+---
+
+## 🛠️ Tech Architecture
+
+```
+src/
+├── components/
+│   ├── layout/         # Floating Navbar & Futuristic Footer
+│   ├── sections/       # Hero, About, SkillsTree, Projects, Experience, Achievements, GitHub, LeetCode, Contact
+│   ├── spline/         # Spline 3D WebGL runtime loader & fallback
+│   └── ui/             # TiltCard, CustomCursor, SectionHeading, Modal, MagneticButton
+├── data/               # Centralized data files (profile, skills, projects, experience, achievements)
+├── hooks/              # useActiveSection scroll spy hook
+├── utils/              # Class merging utilities (cn)
+├── App.tsx             # Root application orchestrator
+├── index.css           # Design tokens, cyber grid, glowing borders & keyframes
+└── main.tsx            # Vite DOM entry
+```
+
+---
+
+## 👤 Personal Information
+- **Name**: Prateek Mohanty
+- **Role**: Aspiring AI/ML Engineer | Creative Developer | UI/UX Designer
+- **Institution**: 3rd Year B.Tech in AI & ML, Odisha, India
+- **GitHub**: [prateek-mohanty11](https://github.com/prateek-mohanty11/)
+- **LinkedIn**: [prateek-mohanty](https://www.linkedin.com/in/prateek-mohanty-134806331/)
+- **LeetCode**: [prateek_mohanty11](https://leetcode.com/u/prateek_mohanty11/)
+- **Email**: [prateekmohanty2006@gmail.com](mailto:prateekmohanty2006@gmail.com)
