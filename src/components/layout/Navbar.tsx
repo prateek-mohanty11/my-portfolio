@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles, Volume2, VolumeX, Bot } from 'lucide-react';
 import { profileData } from '../../data/profile';
 import { useActiveSection } from '../../hooks/useActiveSection';
 import { cn } from '../../utils/cn';
+import { soundFx } from '../../utils/audio';
 
 const navItems = [
   { label: 'About', href: '#about', id: 'about' },
@@ -14,9 +15,14 @@ const navItems = [
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onOpenAiAssistant?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(soundFx.getMuted());
   const activeSection = useActiveSection(navItems.map(item => item.id), 250);
 
   useEffect(() => {
@@ -28,7 +34,14 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
+    soundFx.playSelect();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleToggleSound = () => {
+    const muted = soundFx.toggleMute();
+    setIsMuted(muted);
+    if (!muted) soundFx.playSelect();
   };
 
   return (
@@ -89,6 +102,8 @@ export const Navbar: React.FC = () => {
                 <a
                   key={item.id}
                   href={item.href}
+                  onMouseEnter={() => soundFx.playHover()}
+                  onClick={() => soundFx.playSelect()}
                   className={cn(
                     'relative px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200',
                     isActive
@@ -109,13 +124,37 @@ export const Navbar: React.FC = () => {
             })}
           </motion.nav>
 
-          {/* Right Action / Status / Optional Resume */}
+          {/* Right Action / Status / Optional Resume / Audio / AI Assistant */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2.5"
           >
+            {/* Audio Toggle */}
+            <button
+              onClick={handleToggleSound}
+              aria-label={isMuted ? "Unmute audio feedback" : "Mute audio feedback"}
+              title={isMuted ? "Enable UI sounds" : "Mute UI sounds"}
+              className="p-2 rounded-xl bg-[#151824] border border-white/10 text-[#A3A8B8] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 transition-colors hidden sm:inline-flex"
+            >
+              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#00D9FF]" />}
+            </button>
+
+            {/* AI Assistant Pill Button */}
+            {onOpenAiAssistant && (
+              <button
+                onClick={() => {
+                  soundFx.playSelect();
+                  onOpenAiAssistant();
+                }}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-[#00D9FF] bg-[#151824] border border-[#00D9FF]/30 hover:border-[#00D9FF] hover:shadow-[0_0_15px_rgba(0,217,255,0.3)] transition-all"
+              >
+                <Bot className="w-3.5 h-3.5" />
+                <span>Ask AI</span>
+              </button>
+            )}
+
             {profileData.contact.resumeUrl ? (
               <a
                 href={profileData.contact.resumeUrl}
@@ -130,6 +169,7 @@ export const Navbar: React.FC = () => {
 
             <a
               href="#contact"
+              onClick={() => soundFx.playSelect()}
               className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium font-sans text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_20px_rgba(155,92,255,0.3)] hover:shadow-[0_0_25px_rgba(155,92,255,0.5)] transition-all transform hover:-translate-y-0.5"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#00D9FF]" />
@@ -138,7 +178,10 @@ export const Navbar: React.FC = () => {
 
             {/* Mobile Hamburger Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => {
+                soundFx.playSelect();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
               aria-label="Toggle Navigation Menu"
               className="md:hidden p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] transition-colors"
             >
@@ -163,13 +206,33 @@ export const Navbar: React.FC = () => {
                 <a
                   key={item.id}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    soundFx.playSelect();
+                    setMobileMenuOpen(false);
+                  }}
                   className="flex items-center justify-between py-2 px-3 rounded-lg text-sm font-medium text-[#F5F5FA] hover:bg-[#151824] hover:text-[#00D9FF] transition-colors"
                 >
                   <span>{item.label}</span>
                   <span className="font-mono text-xs text-[#A3A8B8]">→</span>
                 </a>
               ))}
+
+              {onOpenAiAssistant && (
+                <button
+                  onClick={() => {
+                    soundFx.playSelect();
+                    setMobileMenuOpen(false);
+                    onOpenAiAssistant();
+                  }}
+                  className="flex items-center justify-between py-2 px-3 rounded-lg text-sm font-mono text-[#00D9FF] bg-[#151824] transition-colors text-left"
+                >
+                  <span className="flex items-center gap-2">
+                    <Bot className="w-4 h-4" />
+                    <span>Ask Prateek's AI</span>
+                  </span>
+                  <span className="text-xs">✨</span>
+                </button>
+              )}
 
               {profileData.contact.resumeUrl && (
                 <a
@@ -187,7 +250,10 @@ export const Navbar: React.FC = () => {
               <div className="pt-2">
                 <a
                   href="#contact"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    soundFx.playSelect();
+                    setMobileMenuOpen(false);
+                  }}
                   className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] shadow-lg"
                 >
                   <Sparkles className="w-4 h-4 text-[#00D9FF]" />
@@ -201,4 +267,3 @@ export const Navbar: React.FC = () => {
     </>
   );
 };
-

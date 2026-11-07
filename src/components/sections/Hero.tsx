@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { ArrowDown, Code2, Sparkles } from 'lucide-react';
+import { ArrowDown, Code2, Sparkles, Box, Cuboid } from 'lucide-react';
 import { profileData } from '../../data/profile';
+import { Interactive3DBoxes } from '../three/Interactive3DBoxes';
 import { SplineHero } from '../spline/SplineHero';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
+import { soundFx } from '../../utils/audio';
 
 const firstName = "PRATEEK";
 const lastName = "MOHANTY.";
@@ -38,6 +40,13 @@ const letterVariants: Variants = {
 };
 
 export const Hero: React.FC = () => {
+  const [sceneMode, setSceneMode] = useState<'boxes-code' | 'spline'>('boxes-code');
+
+  const toggleSceneMode = (mode: 'boxes-code' | 'spline') => {
+    soundFx.playSelect();
+    setSceneMode(mode);
+  };
+
   return (
     <section
       id="hero"
@@ -82,6 +91,7 @@ export const Hero: React.FC = () => {
                   <motion.span
                     key={`first-${index}`}
                     variants={letterVariants}
+                    onMouseEnter={() => soundFx.playHover()}
                     whileHover={{
                       y: -8,
                       scale: 1.1,
@@ -102,6 +112,7 @@ export const Hero: React.FC = () => {
                   <motion.span
                     key={`last-${index}`}
                     variants={letterVariants}
+                    onMouseEnter={() => soundFx.playHover()}
                     whileHover={{
                       y: -8,
                       scale: 1.1,
@@ -172,6 +183,7 @@ export const Hero: React.FC = () => {
           >
             <a
               href="#projects"
+              onClick={() => soundFx.playSelect()}
               className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_25px_rgba(155,92,255,0.4)] transition-all transform hover:-translate-y-0.5"
             >
               <Sparkles className="w-4 h-4 text-[#00D9FF]" />
@@ -180,6 +192,7 @@ export const Hero: React.FC = () => {
 
             <a
               href="#contact"
+              onClick={() => soundFx.playSelect()}
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-display font-semibold text-sm text-[#F5F5FA] bg-[#10121A] border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#151824] shadow-[0_0_15px_rgba(0,217,255,0.15)] transition-all transform hover:-translate-y-0.5"
             >
               <span>Let's Connect</span>
@@ -202,6 +215,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub Profile"
+                onMouseEnter={() => soundFx.playHover()}
                 className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
               >
                 <GithubIcon className="w-4 h-4" />
@@ -211,6 +225,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn Profile"
+                onMouseEnter={() => soundFx.playHover()}
                 className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
               >
                 <LinkedinIcon className="w-4 h-4" />
@@ -220,6 +235,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LeetCode Profile"
+                onMouseEnter={() => soundFx.playHover()}
                 className="p-2.5 rounded-xl bg-[#10121A] border border-white/10 text-[#F5F5FA] hover:text-[#9B5CFF] hover:border-[#9B5CFF]/40 hover:shadow-[0_0_12px_rgba(155,92,255,0.3)] transition-all"
               >
                 <Code2 className="w-4 h-4" />
@@ -229,9 +245,43 @@ export const Hero: React.FC = () => {
 
         </div>
 
-        {/* RIGHT COLUMN: Published Spline 3D Scene */}
-        <div className="lg:col-span-5 relative w-full flex items-center justify-center">
-          <SplineHero />
+        {/* RIGHT COLUMN: Code-based Interactive 3D Boxes (Hover Effect without Texts) */}
+        <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center">
+          
+          {/* Subtle Scene Switcher Pill (3D Boxes Code vs Spline) */}
+          <div className="mb-2 p-1 rounded-full bg-[#10121A]/80 border border-white/10 backdrop-blur-md flex items-center gap-1 z-20">
+            <button
+              onClick={() => toggleSceneMode('boxes-code')}
+              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
+                sceneMode === 'boxes-code'
+                  ? 'bg-[#151824] text-[#00D9FF] border border-[#00D9FF]/40 shadow-sm'
+                  : 'text-[#A3A8B8] hover:text-white'
+              }`}
+            >
+              <Box className="w-3.5 h-3.5" />
+              <span>3D Boxes (Code)</span>
+            </button>
+            <button
+              onClick={() => toggleSceneMode('spline')}
+              className={`px-3 py-1 rounded-full text-[11px] font-mono transition-all flex items-center gap-1.5 ${
+                sceneMode === 'spline'
+                  ? 'bg-[#151824] text-[#9B5CFF] border border-[#9B5CFF]/40 shadow-sm'
+                  : 'text-[#A3A8B8] hover:text-white'
+              }`}
+            >
+              <Cuboid className="w-3.5 h-3.5" />
+              <span>Spline Scene</span>
+            </button>
+          </div>
+
+          {/* 3D Scene Container */}
+          <div className="w-full">
+            {sceneMode === 'boxes-code' ? (
+              <Interactive3DBoxes />
+            ) : (
+              <SplineHero />
+            )}
+          </div>
         </div>
 
       </div>

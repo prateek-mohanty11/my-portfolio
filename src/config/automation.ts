@@ -59,3 +59,4 @@ export const automationConfig: AutomationConfig = {
     lastSynchronized: new Date().toISOString(),
   }
 };
+
