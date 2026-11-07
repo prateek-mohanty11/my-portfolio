@@ -32,8 +32,8 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className={cn(
-            'inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-widest uppercase mb-4',
-            'bg-[#151824] border border-[#9B5CFF]/30 text-[#00D9FF]',
+            'inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-[11px] font-mono tracking-[0.14em] uppercase mb-3.5',
+            'bg-[#0C0E15] border border-white/10 text-[#00D9FF]',
             align === 'center' ? 'justify-center' : ''
           )}
         >
@@ -47,7 +47,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-[#F5F5FA]"
+        className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-[-0.03em] text-[#F5F5FA] leading-[1.08]"
       >
         {title}
       </motion.h2>
@@ -58,7 +58,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-base sm:text-lg text-[#A3A8B8] leading-relaxed font-sans"
+          className="mt-3 text-base sm:text-lg text-[#9095A6] leading-relaxed font-sans max-w-xl"
         >
           {subtitle}
         </motion.p>

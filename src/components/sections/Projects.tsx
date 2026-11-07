@@ -49,23 +49,20 @@ export const Projects: React.FC = () => {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <TiltCard
-                  maxTilt={6}
-                  className="h-full rounded-3xl bg-[#10121A]/85 border border-white/10 p-6 flex flex-col justify-between backdrop-blur-xl shadow-xl transition-all duration-300 glow-card group"
-                  style={{
-                    borderColor: 'rgba(255, 255, 255, 0.08)'
-                  }}
+                  maxTilt={5}
+                  className="h-full rounded-2xl bg-[#0C0E15] border border-white/[0.08] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 glow-card group hover:border-[#00D9FF]/30"
                 >
                   <div>
                     {/* Top Meta info */}
                     <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-xs font-bold text-[#A3A8B8] group-hover:text-[#00D9FF] transition-colors">
+                      <span className="font-mono text-[11px] font-semibold text-[#5C6275] tracking-wider group-hover:text-[#00D9FF] transition-colors">
                         PROJECT // {project.number}
                       </span>
                       <span
-                        className="text-[11px] font-mono px-2.5 py-0.5 rounded-full border"
+                        className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded border"
                         style={{
-                          backgroundColor: `${project.accentColor}15`,
-                          borderColor: `${project.accentColor}40`,
+                          backgroundColor: `${project.accentColor}12`,
+                          borderColor: `${project.accentColor}35`,
                           color: project.accentColor
                         }}
                       >
@@ -74,33 +71,33 @@ export const Projects: React.FC = () => {
                     </div>
 
                     {/* Interactive Visual Graphic */}
-                    <div className="mb-6 rounded-2xl overflow-hidden shadow-inner">
+                    <div className="mb-5 rounded-xl overflow-hidden border border-white/[0.06]">
                       {renderProjectVisual(project.visualType)}
                     </div>
 
                     {/* Title & Tagline */}
-                    <h3 className="font-display font-bold text-2xl text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors mb-2">
+                    <h3 className="font-display font-extrabold text-xl sm:text-2xl text-[#F5F5FA] tracking-tight group-hover:text-[#00D9FF] transition-colors mb-1.5">
                       {project.title}
                     </h3>
-                    <p className="text-xs font-mono text-[#A3A8B8] mb-4">
+                    <p className="text-xs font-mono text-[#9095A6] mb-3">
                       {project.category}
                     </p>
-                    <p className="text-sm text-[#A3A8B8] leading-relaxed mb-6 line-clamp-3">
+                    <p className="text-xs sm:text-sm text-[#9095A6] leading-relaxed mb-5 line-clamp-3 font-sans">
                       {project.solution}
                     </p>
 
                     {/* Technology tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
+                    <div className="flex flex-wrap gap-1.5 mb-5">
                       {project.technologies.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#151824] text-[#F5F5FA]/80 border border-white/5"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#121520] text-[#CCD0DF] border border-white/[0.06]"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 4 && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#151824] text-[#A3A8B8]">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#121520] text-[#5C6275] border border-white/[0.04]">
                           +{project.technologies.length - 4}
                         </span>
                       )}
@@ -108,10 +105,10 @@ export const Projects: React.FC = () => {
                   </div>
 
                   {/* Actions Bar */}
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-2 text-xs font-display font-semibold text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors"
+                      className="inline-flex items-center gap-2 text-xs font-display font-medium tracking-wide text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors"
                     >
                       <span>View Architecture</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

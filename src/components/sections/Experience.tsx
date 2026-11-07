@@ -40,46 +40,46 @@ export const Experience: React.FC = () => {
                 className="relative group"
               >
                 {/* Timeline node icon */}
-                <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#10121A] border-2 border-[#9B5CFF] flex items-center justify-center shadow-[0_0_12px_rgba(155,92,255,0.6)] group-hover:border-[#00D9FF] group-hover:shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-all">
+                <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#0C0E15] border-2 border-[#9B5CFF] flex items-center justify-center shadow-[0_0_10px_rgba(155,92,255,0.4)] group-hover:border-[#00D9FF] group-hover:shadow-[0_0_12px_rgba(0,217,255,0.5)] transition-all">
                   <div className="w-2 h-2 rounded-full bg-[#00D9FF]" />
                 </div>
 
                 {/* Experience Card */}
                 <TiltCard
-                  maxTilt={4}
-                  className="rounded-2xl bg-[#10121A]/90 border border-white/10 p-6 sm:p-7 backdrop-blur-xl transition-all duration-300 hover:border-white/20 glow-card"
+                  maxTilt={3}
+                  className="rounded-xl bg-[#0C0E15] border border-white/[0.08] p-6 sm:p-7 transition-all duration-300 hover:border-white/20 glow-card"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-[#151824] border border-[#9B5CFF]/30 text-[#00D9FF]">
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#121520] border border-[#00D9FF]/25 text-[#00D9FF]">
                         {exp.tag}
                       </span>
-                      <span className="text-xs font-mono text-[#A3A8B8] capitalize">
+                      <span className="text-[11px] font-mono text-[#5C6275] uppercase tracking-wider">
                         • {exp.type}
                       </span>
                     </div>
 
                     <button
                       onClick={() => toggleExpand(exp.id)}
-                      className="inline-flex items-center gap-1 text-xs font-mono text-[#A3A8B8] hover:text-[#00D9FF] transition-colors"
+                      className="inline-flex items-center gap-1 text-[11px] font-mono text-[#9095A6] hover:text-[#00D9FF] transition-colors"
                     >
-                      <span>{isExpanded ? "Collapse" : "Expand"}</span>
+                      <span>{isExpanded ? "[ COLLAPSE ]" : "[ EXPAND ]"}</span>
                       {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                     </button>
                   </div>
 
                   {/* Role & Org */}
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors">
+                  <h3 className="font-display font-extrabold text-lg sm:text-xl text-[#F5F5FA] tracking-tight group-hover:text-[#00D9FF] transition-colors">
                     {exp.role}
                   </h3>
                   
-                  <div className="flex items-center gap-2 text-sm text-[#A3A8B8] font-sans mt-1 mb-4">
-                    <Building2 className="w-4 h-4 text-[#9B5CFF]" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-[#9095A6] font-sans mt-1 mb-3.5">
+                    <Building2 className="w-3.5 h-3.5 text-[#9B5CFF]" />
                     <span className="text-[#F5F5FA]/90 font-medium">{exp.organization}</span>
                   </div>
 
                   {/* Core Description */}
-                  <p className="text-sm text-[#A3A8B8] leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-[#9095A6] leading-relaxed mb-4 font-sans">
                     "{exp.description}"
                   </p>
 
@@ -89,16 +89,16 @@ export const Experience: React.FC = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="pt-4 border-t border-white/10 space-y-3"
+                      className="pt-4 border-t border-white/[0.08] space-y-3"
                     >
-                      <span className="text-xs font-mono text-[#A3A8B8] uppercase tracking-wider block">
+                      <span className="text-[11px] font-mono text-[#5C6275] uppercase tracking-wider block">
                         Core Competencies & Hands-On Scope:
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {exp.skillsInvolved.map((skill) => (
                           <span
                             key={skill}
-                            className="text-xs font-mono px-3 py-1 rounded-lg bg-[#151824] border border-white/5 text-[#F5F5FA]/90"
+                            className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#121520] text-[#CCD0DF] border border-white/[0.05]"
                           >
                             {skill}
                           </span>

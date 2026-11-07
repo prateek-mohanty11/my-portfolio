@@ -92,27 +92,27 @@ export const Contact: React.FC = () => {
           {/* Left Column: Direct Contact Details & Copy */}
           <div className="lg:col-span-5 space-y-6">
             <TiltCard
-              maxTilt={6}
-              className="p-8 rounded-3xl bg-[#10121A]/90 border border-white/10 backdrop-blur-xl shadow-xl glow-card"
+              maxTilt={4}
+              className="p-7 sm:p-8 rounded-2xl bg-[#0C0E15] border border-white/[0.08] shadow-sm glow-card"
             >
-              <span className="text-xs font-mono text-[#00D9FF] tracking-wider uppercase block mb-2">
+              <span className="text-[11px] font-mono text-[#00D9FF] tracking-wider uppercase block mb-2">
                 // DIRECT INBOX
               </span>
-              <h3 className="font-display font-bold text-2xl text-[#F5F5FA] mb-4">
+              <h3 className="font-display font-extrabold text-2xl text-[#F5F5FA] tracking-tight mb-3">
                 Reach out directly
               </h3>
-              <p className="text-sm text-[#A3A8B8] leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-[#9095A6] font-sans leading-relaxed mb-6">
                 Whether you want to discuss AI systems, explore creative development opportunities, or brainstorm project ideas, feel free to drop an email.
               </p>
 
               {/* Email Copier */}
-              <div className="p-4 rounded-2xl bg-[#151824] border border-white/10 flex items-center justify-between gap-3 mb-6">
+              <div className="p-4 rounded-xl bg-[#121520] border border-white/[0.06] flex items-center justify-between gap-3 mb-6">
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="p-2.5 rounded-xl bg-[#9B5CFF]/15 text-[#9B5CFF] flex-shrink-0">
-                    <Mail className="w-5 h-5" />
+                  <div className="p-2.5 rounded-lg bg-[#9B5CFF]/15 text-[#9B5CFF] flex-shrink-0">
+                    <Mail className="w-4 h-4" />
                   </div>
                   <div className="overflow-hidden">
-                    <span className="block text-[10px] font-mono text-[#A3A8B8]">PRIMARY EMAIL</span>
+                    <span className="block text-[10px] font-mono text-[#5C6275] uppercase tracking-wider">PRIMARY EMAIL</span>
                     <a
                       href={`mailto:${profileData.contact.email}`}
                       className="font-mono text-xs sm:text-sm text-[#F5F5FA] hover:text-[#00D9FF] truncate block transition-colors"
@@ -124,7 +124,7 @@ export const Contact: React.FC = () => {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2.5 rounded-xl bg-[#10121A] text-[#A3A8B8] hover:text-[#00D9FF] hover:bg-[#1a1e2e] border border-white/5 transition-all flex-shrink-0"
+                  className="p-2.5 rounded-lg bg-[#08090D] text-[#9095A6] hover:text-[#00D9FF] hover:bg-[#151824] border border-white/5 transition-all flex-shrink-0"
                   aria-label="Copy Email Address"
                   title="Copy to clipboard"
                 >
@@ -133,16 +133,16 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Social Channels */}
-              <div className="pt-6 border-t border-white/10">
-                <span className="text-xs font-mono text-[#A3A8B8] block mb-3 uppercase tracking-wider">
-                  Connect on Socials:
+              <div className="pt-6 border-t border-white/[0.08]">
+                <span className="text-[11px] font-mono text-[#5C6275] block mb-3 uppercase tracking-wider">
+                  // CONNECT ON SOCIALS:
                 </span>
                 <div className="grid grid-cols-3 gap-3">
                   <a
                     href={profileData.contact.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-3 rounded-xl bg-[#151824] border border-white/5 hover:border-[#00D9FF]/40 text-center text-xs font-mono text-[#F5F5FA] hover:text-[#00D9FF] transition-all flex flex-col items-center gap-1.5"
+                    className="p-3 rounded-lg bg-[#121520] border border-white/[0.06] hover:border-[#00D9FF]/40 text-center text-[11px] font-mono text-[#F5F5FA] hover:text-[#00D9FF] transition-all flex flex-col items-center gap-1.5"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>GitHub</span>
@@ -151,7 +151,7 @@ export const Contact: React.FC = () => {
                     href={profileData.contact.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-3 rounded-xl bg-[#151824] border border-white/5 hover:border-[#00D9FF]/40 text-center text-xs font-mono text-[#F5F5FA] hover:text-[#00D9FF] transition-all flex flex-col items-center gap-1.5"
+                    className="p-3 rounded-lg bg-[#121520] border border-white/[0.06] hover:border-[#00D9FF]/40 text-center text-[11px] font-mono text-[#F5F5FA] hover:text-[#00D9FF] transition-all flex flex-col items-center gap-1.5"
                   >
                     <LinkedinIcon className="w-4 h-4" />
                     <span>LinkedIn</span>
@@ -160,7 +160,7 @@ export const Contact: React.FC = () => {
                     href={profileData.contact.leetcode}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-3 rounded-xl bg-[#151824] border border-white/5 hover:border-amber-400/40 text-center text-xs font-mono text-[#F5F5FA] hover:text-amber-400 transition-all flex flex-col items-center gap-1.5"
+                    className="p-3 rounded-lg bg-[#121520] border border-white/[0.06] hover:border-amber-400/40 text-center text-[11px] font-mono text-[#F5F5FA] hover:text-amber-400 transition-all flex flex-col items-center gap-1.5"
                   >
                     <Code2 className="w-4 h-4" />
                     <span>LeetCode</span>
@@ -172,16 +172,16 @@ export const Contact: React.FC = () => {
 
           {/* Right Column: Mailto-powered Interactive Contact Form UI */}
           <div className="lg:col-span-7">
-            <div className="p-8 rounded-3xl bg-[#10121A]/90 border border-white/10 backdrop-blur-xl shadow-xl">
+            <div className="p-7 sm:p-8 rounded-2xl bg-[#0C0E15] border border-white/[0.08] shadow-sm">
               <div className="flex items-center gap-2 mb-6">
                 <MessageSquare className="w-5 h-5 text-[#9B5CFF]" />
-                <h4 className="font-display font-bold text-xl text-[#F5F5FA]">
+                <h4 className="font-display font-extrabold text-xl text-[#F5F5FA] tracking-tight">
                   Send a Direct Message
                 </h4>
               </div>
 
               {statusMessage && (
-                <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
                   {statusMessage}
                 </div>
               )}
@@ -189,7 +189,7 @@ export const Contact: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono text-[#A3A8B8] mb-1.5 uppercase">
+                    <label className="block text-[11px] font-mono text-[#5C6275] mb-1.5 uppercase tracking-wider">
                       Your Name
                     </label>
                     <input
@@ -198,12 +198,12 @@ export const Contact: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-3 rounded-xl bg-[#151824] border border-white/10 text-sm text-[#F5F5FA] placeholder-[#A3A8B8]/40 focus:outline-none focus:border-[#00D9FF] focus:ring-1 focus:ring-[#00D9FF] transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[#08090D] border border-white/[0.08] text-sm text-[#F5F5FA] placeholder-[#5C6275] focus:outline-none focus:border-[#00D9FF] focus:ring-1 focus:ring-[#00D9FF] transition-all font-sans"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-[#A3A8B8] mb-1.5 uppercase">
+                    <label className="block text-[11px] font-mono text-[#5C6275] mb-1.5 uppercase tracking-wider">
                       Your Email
                     </label>
                     <input
@@ -212,7 +212,7 @@ export const Contact: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="jane@example.com"
-                      className="w-full px-4 py-3 rounded-xl bg-[#151824] border border-white/10 text-sm text-[#F5F5FA] placeholder-[#A3A8B8]/40 focus:outline-none focus:border-[#00D9FF] focus:ring-1 focus:ring-[#00D9FF] transition-all"
+                      className="w-full px-4 py-3 rounded-lg bg-[#08090D] border border-white/[0.08] text-sm text-[#F5F5FA] placeholder-[#5C6275] focus:outline-none focus:border-[#00D9FF] focus:ring-1 focus:ring-[#00D9FF] transition-all font-sans"
                     />
                   </div>
                 </div>

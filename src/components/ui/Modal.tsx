@@ -50,18 +50,18 @@ export const Modal: React.FC<ModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl bg-[#10121A] border border-[#9B5CFF]/30 p-6 sm:p-8 shadow-2xl shadow-[#9B5CFF]/10 z-10"
+            className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl bg-[#0C0E15] border border-white/[0.12] p-6 sm:p-8 shadow-2xl z-10"
           >
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+            <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
               {title ? (
-                <h3 className="text-xl font-display font-bold text-[#F5F5FA]">
+                <h3 className="text-xl font-display font-extrabold tracking-tight text-[#F5F5FA]">
                   {title}
                 </h3>
               ) : <div />}
               <button
                 onClick={onClose}
                 aria-label="Close modal"
-                className="p-2 rounded-lg text-[#A3A8B8] hover:text-[#F5F5FA] hover:bg-[#151824] transition-colors"
+                className="p-2 rounded-lg text-[#9095A6] hover:text-[#F5F5FA] hover:bg-[#121520] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

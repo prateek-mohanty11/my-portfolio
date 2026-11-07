@@ -45,14 +45,14 @@ export const SkillsTree: React.FC = () => {
                 key={branch.id}
                 onClick={() => handleSelectBranch(branch.id)}
                 onMouseEnter={() => soundFx.playHover()}
-                className={`relative p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 border ${
+                className={`relative p-4 sm:p-5 rounded-xl text-left transition-all duration-300 border ${
                   isSelected
-                    ? 'bg-[#151824] shadow-xl'
-                    : 'bg-[#10121A]/70 hover:bg-[#151824]/60 border-white/5'
+                    ? 'bg-[#121520] shadow-sm'
+                    : 'bg-[#0C0E15] hover:bg-[#10131E] border-white/[0.06]'
                 }`}
                 style={{
                   borderColor: isSelected ? branch.color : 'rgba(255, 255, 255, 0.08)',
-                  boxShadow: isSelected ? `0 0 25px ${branch.glowColor}` : 'none'
+                  boxShadow: isSelected ? `0 0 20px ${branch.glowColor}` : 'none'
                 }}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -60,20 +60,20 @@ export const SkillsTree: React.FC = () => {
                     className="w-2.5 h-2.5 rounded-full"
                     style={{ backgroundColor: branch.color }}
                   />
-                  <span className="text-[10px] font-mono text-[#A3A8B8]">
-                    {branch.skills.length} Nodes
+                  <span className="text-[10px] font-mono text-[#5C6275]">
+                    [{branch.skills.length} NODES]
                   </span>
                 </div>
-                <h3 className="font-display font-semibold text-sm sm:text-base text-[#F5F5FA] mb-1">
+                <h3 className="font-display font-bold text-sm sm:text-base text-[#F5F5FA] tracking-tight mb-1">
                   {branch.name}
                 </h3>
-                <p className="text-xs text-[#A3A8B8] line-clamp-2">
+                <p className="text-xs text-[#9095A6] font-sans line-clamp-2">
                   {branch.description}
                 </p>
                 {isSelected && (
                   <motion.div
                     layoutId="branchIndicator"
-                    className="absolute -bottom-[2px] left-6 right-6 h-[2px] rounded-full"
+                    className="absolute -bottom-[1px] left-4 right-4 h-[2px] rounded-full"
                     style={{ backgroundColor: branch.color }}
                   />
                 )}
@@ -158,13 +158,10 @@ export const SkillsTree: React.FC = () => {
                     whileHover={{ y: -4 }}
                     onMouseEnter={() => soundFx.playHover()}
                     onClick={() => handleSelectSkill(skill)}
-                    className="group relative cursor-pointer p-5 rounded-2xl bg-[#151824]/90 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-md glow-card"
-                    style={{
-                      borderColor: 'rgba(255, 255, 255, 0.08)',
-                    }}
+                    className="group relative cursor-pointer p-5 rounded-xl bg-[#0C0E15] border border-white/[0.08] hover:border-white/20 transition-all duration-300 shadow-sm glow-card"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/5 text-[#A3A8B8] border border-white/5">
+                      <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-[#121520] text-[#9095A6] border border-white/[0.04]">
                         {skill.category}
                       </span>
                       <div
@@ -173,12 +170,12 @@ export const SkillsTree: React.FC = () => {
                       />
                     </div>
 
-                    <h4 className="font-display font-bold text-lg text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors mb-1.5 flex items-center justify-between">
+                    <h4 className="font-display font-bold text-base text-[#F5F5FA] tracking-tight group-hover:text-[#00D9FF] transition-colors mb-1.5 flex items-center justify-between">
                       <span>{skill.name}</span>
-                      <ChevronRight className="w-4 h-4 text-[#A3A8B8] group-hover:translate-x-1 group-hover:text-[#00D9FF] transition-all" />
+                      <ChevronRight className="w-4 h-4 text-[#5C6275] group-hover:translate-x-1 group-hover:text-[#00D9FF] transition-all" />
                     </h4>
 
-                    <p className="text-xs text-[#A3A8B8] leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-xs text-[#9095A6] leading-relaxed mb-4 line-clamp-2 font-sans">
                       {skill.description}
                     </p>
 
@@ -186,7 +183,7 @@ export const SkillsTree: React.FC = () => {
                       {skill.applications.map((app) => (
                         <span
                           key={app}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10121A] text-[#F5F5FA]/80 border border-white/5"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#121520] text-[#CCD0DF] border border-white/[0.05]"
                         >
                           {app}
                         </span>
@@ -199,10 +196,10 @@ export const SkillsTree: React.FC = () => {
           </div>
 
           {/* Bottom Info bar */}
-          <div className="relative z-10 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#A3A8B8]">
+          <div className="relative z-10 pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[#9095A6]">
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#9B5CFF]" />
-              <span>4 Branches • 17 Core Nodes • Rigorous Computer Science & AI Foundation</span>
+              <span>4 Branches • 17 Core Nodes • Computer Science & AI Specialization</span>
             </div>
             <span className="text-[#00D9FF]">Zero fabricated proficiency percentages</span>
           </div>

@@ -64,19 +64,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
               className="group relative flex items-center gap-3 focus:outline-none"
               aria-label="Prateek Mohanty - Home"
             >
-              <div className="relative w-10 h-10 rounded-xl bg-[#10121A] border border-[#9B5CFF]/40 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[#00D9FF] group-hover:shadow-[0_0_15px_rgba(0,217,255,0.4)]">
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#9B5CFF]/20 to-[#00D9FF]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="font-display font-bold text-lg text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors tracking-tight">
+              <div className="relative w-9 h-9 rounded-lg bg-[#0C0E15] border border-white/[0.12] flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-[#00D9FF]">
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#9B5CFF]/15 to-[#00D9FF]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="font-display font-black text-base text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors tracking-tight">
                   PM
                 </span>
                 {/* Glow accent */}
-                <div className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-[#00D9FF] blur-[1px]" />
+                <div className="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-[#00D9FF]" />
               </div>
               <div className="hidden sm:flex flex-col text-left">
-                <span className="text-sm font-display font-semibold text-[#F5F5FA] tracking-wide group-hover:text-[#00D9FF] transition-colors">
+                <span className="text-sm font-display font-bold text-[#F5F5FA] tracking-tight group-hover:text-[#00D9FF] transition-colors">
                   Prateek Mohanty
                 </span>
-                <span className="text-[10px] font-mono text-[#A3A8B8] flex items-center gap-1">
+                <span className="text-[10px] font-mono text-[#5C6275] flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   AI & Creative Dev
                 </span>
@@ -90,10 +90,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className={cn(
-              'hidden md:flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300',
+              'hidden md:flex items-center gap-1 px-3.5 py-1.5 rounded-full transition-all duration-300',
               scrolled
-                ? 'bg-[#10121A]/85 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]'
-                : 'bg-[#10121A]/50 backdrop-blur-md border border-white/5'
+                ? 'bg-[#0C0E15]/90 backdrop-blur-md border border-white/[0.08] shadow-md'
+                : 'bg-[#0C0E15]/60 backdrop-blur-sm border border-white/[0.05]'
             )}
           >
             {navItems.map((item) => {
@@ -105,16 +105,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
                   onMouseEnter={() => soundFx.playHover()}
                   onClick={() => soundFx.playSelect()}
                   className={cn(
-                    'relative px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200',
+                    'relative px-3 py-1.5 rounded-full text-xs font-sans font-medium transition-all duration-200',
                     isActive
                       ? 'text-[#F5F5FA]'
-                      : 'text-[#A3A8B8] hover:text-[#F5F5FA]'
+                      : 'text-[#9095A6] hover:text-[#F5F5FA]'
                   )}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activePill"
-                      className="absolute inset-0 bg-gradient-to-r from-[#9B5CFF]/30 to-[#00D9FF]/20 border border-[#00D9FF]/40 rounded-full"
+                      className="absolute inset-0 bg-[#171B29] border border-[#00D9FF]/30 rounded-full"
                       transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -129,14 +129,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-2.5"
+            className="flex items-center gap-2"
           >
             {/* Audio Toggle */}
             <button
               onClick={handleToggleSound}
               aria-label={isMuted ? "Unmute audio feedback" : "Mute audio feedback"}
               title={isMuted ? "Enable UI sounds" : "Mute UI sounds"}
-              className="p-2 rounded-xl bg-[#151824] border border-white/10 text-[#A3A8B8] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 transition-colors hidden sm:inline-flex"
+              className="p-2 rounded-lg bg-[#0C0E15] border border-white/[0.08] text-[#9095A6] hover:text-[#00D9FF] hover:border-[#00D9FF]/40 transition-colors hidden sm:inline-flex"
             >
               {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#00D9FF]" />}
             </button>
@@ -148,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
                   soundFx.playSelect();
                   onOpenAiAssistant();
                 }}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium text-[#00D9FF] bg-[#151824] border border-[#00D9FF]/30 hover:border-[#00D9FF] hover:shadow-[0_0_15px_rgba(0,217,255,0.3)] transition-all"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono font-medium text-[#00D9FF] bg-[#0C0E15] border border-[#00D9FF]/30 hover:border-[#00D9FF] transition-all"
               >
                 <Bot className="w-3.5 h-3.5" />
                 <span>Ask AI</span>
@@ -160,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
                 href={profileData.contact.resumeUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono font-medium text-[#00D9FF] bg-[#151824] border border-[#00D9FF]/30 hover:border-[#00D9FF] hover:shadow-[0_0_12px_rgba(0,217,255,0.3)] transition-all"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-medium text-[#00D9FF] bg-[#0C0E15] border border-[#00D9FF]/30 hover:border-[#00D9FF] transition-all"
               >
                 <span>Resume</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -170,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAiAssistant }) => {
             <a
               href="#contact"
               onClick={() => soundFx.playSelect()}
-              className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium font-sans text-white bg-gradient-to-r from-[#9B5CFF] to-[#7B2CBF] hover:from-[#8A4CE6] hover:to-[#6A23A6] shadow-[0_0_20px_rgba(155,92,255,0.3)] hover:shadow-[0_0_25px_rgba(155,92,255,0.5)] transition-all transform hover:-translate-y-0.5"
+              className="hidden lg:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium font-sans text-white bg-[#9B5CFF] hover:bg-[#8844FF] border border-[#9B5CFF] transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#00D9FF]" />
               <span>Let's Connect</span>

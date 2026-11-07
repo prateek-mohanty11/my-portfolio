@@ -86,24 +86,24 @@ export const GitHubActivity: React.FC = () => {
         {/* GitHub Stats Strip (if fetched) */}
         {user && (
           <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="p-4 rounded-xl bg-[#10121A] border border-white/10 text-center">
-              <span className="text-2xl font-display font-bold text-[#F5F5FA]">{user.public_repos}</span>
-              <span className="block text-[11px] font-mono text-[#A3A8B8] mt-1">Public Repositories</span>
+            <div className="p-4 rounded-xl bg-[#0C0E15] border border-white/[0.08] text-center">
+              <span className="text-2xl font-mono font-bold text-[#F5F5FA]">{user.public_repos}</span>
+              <span className="block text-[11px] font-mono text-[#5C6275] uppercase tracking-wider mt-1">Repositories</span>
             </div>
-            <div className="p-4 rounded-xl bg-[#10121A] border border-white/10 text-center">
-              <span className="text-2xl font-display font-bold text-[#00D9FF]">{user.followers}</span>
-              <span className="block text-[11px] font-mono text-[#A3A8B8] mt-1">Followers</span>
+            <div className="p-4 rounded-xl bg-[#0C0E15] border border-white/[0.08] text-center">
+              <span className="text-2xl font-mono font-bold text-[#00D9FF]">{user.followers}</span>
+              <span className="block text-[11px] font-mono text-[#5C6275] uppercase tracking-wider mt-1">Followers</span>
             </div>
-            <div className="p-4 rounded-xl bg-[#10121A] border border-white/10 text-center">
-              <span className="text-2xl font-display font-bold text-[#9B5CFF]">{user.following}</span>
-              <span className="block text-[11px] font-mono text-[#A3A8B8] mt-1">Following</span>
+            <div className="p-4 rounded-xl bg-[#0C0E15] border border-white/[0.08] text-center">
+              <span className="text-2xl font-mono font-bold text-[#9B5CFF]">{user.following}</span>
+              <span className="block text-[11px] font-mono text-[#5C6275] uppercase tracking-wider mt-1">Following</span>
             </div>
           </div>
         )}
 
         {/* Repositories Grid or Profile Fallback */}
         {repos.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {repos.map((repo) => (
               <a
                 key={repo.id}
@@ -113,28 +113,28 @@ export const GitHubActivity: React.FC = () => {
                 className="group"
               >
                 <TiltCard
-                  maxTilt={6}
-                  className="h-full rounded-2xl bg-[#10121A]/85 border border-white/10 p-6 flex flex-col justify-between backdrop-blur-xl transition-all duration-300 hover:border-[#00D9FF]/40 glow-card"
+                  maxTilt={4}
+                  className="h-full rounded-xl bg-[#0C0E15] border border-white/[0.08] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#00D9FF]/40 glow-card"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2 text-xs font-mono text-[#A3A8B8]">
-                        <BookOpen className="w-4 h-4 text-[#00D9FF]" />
-                        <span>Public Repo</span>
+                      <div className="flex items-center gap-2 text-[11px] font-mono text-[#5C6275]">
+                        <BookOpen className="w-3.5 h-3.5 text-[#00D9FF]" />
+                        <span>PUBLIC REPO</span>
                       </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-[#A3A8B8] group-hover:text-[#00D9FF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ExternalLink className="w-3.5 h-3.5 text-[#5C6275] group-hover:text-[#00D9FF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </div>
 
-                    <h4 className="font-display font-bold text-lg text-[#F5F5FA] group-hover:text-[#00D9FF] transition-colors mb-2 line-clamp-1">
+                    <h4 className="font-display font-bold text-base text-[#F5F5FA] tracking-tight group-hover:text-[#00D9FF] transition-colors mb-2 line-clamp-1">
                       {repo.name}
                     </h4>
 
-                    <p className="text-xs text-[#A3A8B8] leading-relaxed mb-6 line-clamp-2">
+                    <p className="text-xs text-[#9095A6] font-sans leading-relaxed mb-6 line-clamp-2">
                       {repo.description || "Public software engineering repository and code assets."}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#A3A8B8]">
+                  <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#5C6275]">
                     <span className="flex items-center gap-1.5 text-[#F5F5FA]">
                       <span className="w-2 h-2 rounded-full bg-[#9B5CFF]" />
                       {repo.language || "Code"}

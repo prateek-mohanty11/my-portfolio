@@ -31,26 +31,26 @@ export const Achievements: React.FC = () => {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <TiltCard
-                  maxTilt={8}
-                  className="h-full rounded-3xl bg-[#10121A]/85 border border-white/10 p-7 flex flex-col justify-between backdrop-blur-xl transition-all duration-300 hover:border-white/20 glow-card"
+                  maxTilt={5}
+                  className="h-full rounded-2xl bg-[#0C0E15] border border-white/[0.08] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-white/20 glow-card"
                 >
                   <div>
                     {/* Header: Trophy / Flag icon & Badge */}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-5">
                       <div
-                        className={`p-3.5 rounded-2xl border flex items-center justify-center ${
+                        className={`p-3 rounded-xl border flex items-center justify-center ${
                           isAward
                             ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
                             : 'bg-[#9B5CFF]/10 border-[#9B5CFF]/30 text-[#00D9FF]'
                         }`}
                       >
-                        {isAward ? <Trophy className="w-6 h-6" /> : <Flag className="w-6 h-6" />}
+                        {isAward ? <Trophy className="w-5 h-5" /> : <Flag className="w-5 h-5" />}
                       </div>
 
                       <span
-                        className={`text-xs font-mono px-3 py-1 rounded-full border ${
+                        className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded border ${
                           isAward
-                            ? 'bg-amber-500/10 border-amber-500/40 text-amber-300'
+                            ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
                             : 'bg-[#00D9FF]/10 border-[#00D9FF]/30 text-[#00D9FF]'
                         }`}
                       >
@@ -59,27 +59,27 @@ export const Achievements: React.FC = () => {
                     </div>
 
                     {/* Title & Organization */}
-                    <h3 className="font-display font-bold text-xl text-[#F5F5FA] mb-2 leading-snug">
+                    <h3 className="font-display font-extrabold text-lg sm:text-xl text-[#F5F5FA] tracking-tight mb-1.5 leading-snug">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs font-mono text-[#A3A8B8] mb-4">
+                    <p className="text-xs font-mono text-[#5C6275] mb-3">
                       {item.organization}
                     </p>
 
-                    <p className="text-sm text-[#A3A8B8] leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm text-[#9095A6] leading-relaxed mb-6 font-sans">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Certificate / Verification Placeholder */}
-                  <div className="pt-4 border-t border-white/10">
-                    <div className="p-3 rounded-xl bg-[#151824] border border-white/5 flex items-center justify-between text-xs font-mono text-[#F5F5FA]">
+                  <div className="pt-4 border-t border-white/[0.08]">
+                    <div className="p-3 rounded-lg bg-[#121520] border border-white/[0.05] flex items-center justify-between text-xs font-mono text-[#F5F5FA]">
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                        <span className="text-[11px] text-[#A3A8B8]">{item.highlight}</span>
+                        <span className="text-[11px] text-[#9095A6]">{item.highlight}</span>
                       </div>
-                      <span className="text-[10px] text-[#00D9FF]">Verified</span>
+                      <span className="text-[10px] text-[#00D9FF] font-medium tracking-wider uppercase">[VERIFIED]</span>
                     </div>
                   </div>
                 </TiltCard>
