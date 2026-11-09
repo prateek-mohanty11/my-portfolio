@@ -51,7 +51,7 @@ app.use(
       return callback(new Error(`CORS blocked for origin: ${requestOrigin}`), false);
     },
     methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
     credentials: true,
     maxAge: 86400 // Cache preflight for 24 hours
   })

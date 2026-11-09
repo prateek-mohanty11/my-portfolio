@@ -33,19 +33,36 @@ export function getMailTransporter(): Transporter {
     );
   }
 
-  cachedTransporter = nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: {
-      user: user || '',
-      pass: pass || ''
-    },
-    // Enforce TLS with modern ciphers
-    tls: {
-      rejectUnauthorized: process.env.NODE_ENV === 'production'
-    }
-  });
+  const isGmail = host.toLowerCase().includes('gmail');
+
+  cachedTransporter = nodemailer.createTransport(
+    isGmail
+      ? {
+          service: 'gmail',
+          auth: {
+            user: user || '',
+            pass: pass || ''
+          },
+          connectionTimeout: 10000,
+          greetingTimeout: 10000,
+          socketTimeout: 15000
+        }
+      : {
+          host,
+          port,
+          secure,
+          auth: {
+            user: user || '',
+            pass: pass || ''
+          },
+          connectionTimeout: 10000,
+          greetingTimeout: 10000,
+          socketTimeout: 15000,
+          tls: {
+            rejectUnauthorized: process.env.NODE_ENV === 'production'
+          }
+        }
+  );
 
   return cachedTransporter;
 }
