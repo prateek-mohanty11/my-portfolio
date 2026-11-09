@@ -89,8 +89,11 @@ export const Hero: React.FC = () => {
               className="font-name font-black tracking-[-0.035em] uppercase text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.92]"
               style={{ fontFamily: "'Exo 2', sans-serif" }}
             >
+              {/* Pure crawlable text for search engine indexers and screen readers */}
+              <span className="sr-only">Prateek Mohanty</span>
+
               {/* First Name: PRATEEK */}
-              <div className="overflow-hidden flex items-center pointer-events-none">
+              <div className="overflow-hidden flex items-center pointer-events-none" aria-hidden="true">
                 {firstName.split("").map((char, index) => (
                   <motion.span
                     key={`first-${index}`}
@@ -115,7 +118,7 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Last Name: MOHANTY. with Architectural Punctuation */}
-              <div className="overflow-hidden relative flex items-center mt-1 sm:mt-1.5 pointer-events-none">
+              <div className="overflow-hidden relative flex items-center mt-1 sm:mt-1.5 pointer-events-none" aria-hidden="true">
                 {lastName.split("").map((char, index) => (
                   <motion.span
                     key={`last-${index}`}

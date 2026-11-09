@@ -1,0 +1,13 @@
+# robots.txt for https://prateek-mohanty.vercel.app/
+User-agent: *
+Allow: /
+
+# Explicitly allow Googlebot
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap Location
+Sitemap: https://prateek-mohanty.vercel.app/sitemap.xml

@@ -390,7 +390,7 @@ export const PhotoRevealSection: React.FC = () => {
                     <div className={`photo-reveal-layer ${isRevealed ? 'revealed' : ''}`}>
                       <img
                         src={myPhoto}
-                        alt="Prateek Mohanty"
+                        alt="Prateek Mohanty - Aspiring AI/ML Engineer and Creative Developer"
                         className="photo-image"
                         loading="eager"
                       />
