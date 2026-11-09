@@ -34,6 +34,14 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('[ContactForm] Submit event triggered', {
+      nameChars: name.trim().length,
+      emailValid: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()),
+      subjectChars: subject.trim().length,
+      messageChars: message.trim().length,
+      honeypotFilled: !!gotcha.trim()
+    });
+
     setSuccessMessage(null);
     setErrorMessage(null);
 
@@ -60,11 +68,25 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // 2. Resolve backend API base URL from Vite environment variable
-    const apiBaseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
+    // 2. Resolve backend API base URL from Vite environment variable with safe production fallback
+    const defaultApiUrl = import.meta.env.PROD
+      ? 'https://my-portfolio-xo7y.onrender.com'
+      : 'http://localhost:5000';
+    const apiBaseUrl = (import.meta.env.VITE_API_URL || defaultApiUrl).replace(/\/+$/, '');
+    const targetUrl = `${apiBaseUrl}/api/contact`;
+
+    // 3. Setup request timeout (25 seconds accommodates Render free-tier cold starts)
+    const REQUEST_TIMEOUT_MS = 25000;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+      console.log(`[ContactForm] Initiating POST request to: ${targetUrl}`, {
+        targetUrl,
+        timeoutMs: REQUEST_TIMEOUT_MS
+      });
+
+      const response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -75,10 +97,19 @@ export const Contact: React.FC = () => {
           subject: subject.trim(),
           message: message.trim(),
           _gotcha: gotcha.trim()
-        })
+        }),
+        signal: controller.signal
+      });
+
+      console.log('[ContactForm] HTTP response received', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
       });
 
       const data = await response.json().catch(() => null);
+
+      console.log('[ContactForm] Parsed response body', { data });
 
       if (response.ok && data?.success) {
         // Success state: display confirmation, trigger celebratory confetti, and clear form
@@ -105,11 +136,25 @@ export const Contact: React.FC = () => {
         setErrorMessage(serverError);
       }
     } catch (networkError: any) {
-      // Backend unavailable or network failure: preserve inputs for retry
-      setErrorMessage(
-        `Unable to reach the contact delivery service. If the backend is starting up, please wait a moment and retry, or write directly to ${profileData.contact.email}.`
-      );
+      console.error('[ContactForm] Request failed with error:', {
+        name: networkError?.name,
+        message: networkError?.message,
+        stack: networkError?.stack,
+        isAbort: networkError?.name === 'AbortError'
+      });
+
+      // Backend unavailable, timeout, or network failure: preserve inputs for retry
+      if (networkError?.name === 'AbortError') {
+        setErrorMessage(
+          `Request timed out after ${REQUEST_TIMEOUT_MS / 1000}s while contacting the server. If the backend is waking up from inactivity, please wait a few seconds and try again, or write directly to ${profileData.contact.email}.`
+        );
+      } else {
+        setErrorMessage(
+          `Unable to reach the contact delivery service. If the backend is starting up, please wait a moment and retry, or write directly to ${profileData.contact.email}.`
+        );
+      }
     } finally {
+      clearTimeout(timeoutId);
       setIsSubmitting(false);
     }
   };
