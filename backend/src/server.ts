@@ -17,7 +17,8 @@ const server = app.listen(PORT, () => {
   Port        : ${PORT}
   Health Check: http://localhost:${PORT}/api/health
   Contact API : http://localhost:${PORT}/api/contact
-  Receiver    : ${process.env.CONTACT_RECEIVER || 'mohantyprateek777@gmail.com'}
+  Provider    : Resend Email API
+  Receiver    : ${process.env.CONTACT_RECEIVER || 'prateekmohanty2006@gmail.com'}
 ======================================================
   `);
 });

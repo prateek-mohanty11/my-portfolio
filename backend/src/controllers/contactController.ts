@@ -26,7 +26,7 @@ export async function handleContactSubmission(
       return;
     }
 
-    // 3. Dispatch email via Nodemailer
+    // 3. Dispatch email via Resend Email API
     const clientIp = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '';
     const userAgent = req.headers['user-agent'] || '';
 
@@ -45,24 +45,18 @@ export async function handleContactSubmission(
         message: "Your message has been sent successfully. I'll get back to you soon."
       });
     } catch (emailError: any) {
-      console.error('[SMTP Delivery Error]:', emailError?.message || emailError);
+      const errorMsg = emailError?.message || '';
 
-      // Distinguish between unconfigured credentials in local dev vs runtime failure
-      const isConfigMissing =
-        !process.env.SMTP_USER ||
-        !process.env.SMTP_APP_PASSWORD ||
-        process.env.SMTP_USER === 'your-automation-email@gmail.com';
-
-      if (isConfigMissing) {
+      if (errorMsg === 'RESEND_API_KEY_MISSING' || !process.env.RESEND_API_KEY) {
         res.status(503).json({
           success: false,
           message:
-            'Email delivery service is currently awaiting SMTP configuration. Please configure SMTP_USER and SMTP_APP_PASSWORD in backend/.env, or email directly.'
+            'Email delivery service is currently awaiting Resend configuration. Please configure RESEND_API_KEY, or email directly.'
         });
         return;
       }
 
-      // Safe production error response without leaking SMTP credentials
+      // Safe production error response without leaking API keys or message contents
       res.status(500).json({
         success: false,
         message:
@@ -73,4 +67,3 @@ export async function handleContactSubmission(
     next(err);
   }
 }
-

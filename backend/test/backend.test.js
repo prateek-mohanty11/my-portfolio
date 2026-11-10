@@ -56,7 +56,7 @@ async function runTests() {
     const validData = await validRes.json();
     assert(
       (validRes.status === 200 && validData.success === true) ||
-      (validRes.status === 503 && validData.success === false && validData.message.includes('SMTP')),
+      (validRes.status === 503 && validData.success === false && validData.message.includes('Resend')),
       'Valid payload processes through validation and reaches mailer dispatch safely'
     );
 

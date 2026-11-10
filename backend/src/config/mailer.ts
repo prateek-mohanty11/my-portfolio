@@ -1,5 +1,4 @@
-import nodemailer from 'nodemailer';
-import type { Transporter } from 'nodemailer';
+import { Resend } from 'resend';
 import { escapeHtml, sanitizeHeader, formatMessageToHtml } from '../utils/sanitize.js';
 
 export interface EmailPayload {
@@ -11,68 +10,44 @@ export interface EmailPayload {
   userAgent?: string;
 }
 
-let cachedTransporter: Transporter | null = null;
+export interface SendEmailResult {
+  messageId: string;
+}
+
+let cachedResendClient: Resend | null = null;
 
 /**
- * Initializes and returns the Nodemailer Transporter.
+ * Returns an instance of the official Resend client.
  */
-export function getMailTransporter(): Transporter {
-  if (cachedTransporter) {
-    return cachedTransporter;
+export function getResendClient(): Resend {
+  if (cachedResendClient) {
+    return cachedResendClient;
   }
 
-  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
-  const port = parseInt(process.env.SMTP_PORT || '465', 10);
-  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_APP_PASSWORD;
+  const apiKey = process.env.RESEND_API_KEY;
 
-  if (!user || !pass) {
+  if (!apiKey) {
     console.warn(
-      '[Mailer Warning] SMTP_USER or SMTP_APP_PASSWORD is not configured in environment variables. Real email delivery will be paused until configured.'
+      '[Resend Warning] RESEND_API_KEY is not configured in environment variables. Email delivery will be unavailable until configured.'
     );
   }
 
-  const isGmail = host.toLowerCase().includes('gmail');
-
-  cachedTransporter = nodemailer.createTransport(
-    isGmail
-      ? {
-          service: 'gmail',
-          auth: {
-            user: user || '',
-            pass: pass || ''
-          },
-          connectionTimeout: 10000,
-          greetingTimeout: 10000,
-          socketTimeout: 15000
-        }
-      : {
-          host,
-          port,
-          secure,
-          auth: {
-            user: user || '',
-            pass: pass || ''
-          },
-          connectionTimeout: 10000,
-          greetingTimeout: 10000,
-          socketTimeout: 15000,
-          tls: {
-            rejectUnauthorized: process.env.NODE_ENV === 'production'
-          }
-        }
-  );
-
-  return cachedTransporter;
+  cachedResendClient = new Resend(apiKey || '');
+  return cachedResendClient;
 }
 
 /**
- * Formats and dispatches the visitor inquiry to the private destination email.
+ * Formats and dispatches the visitor inquiry to the recipient email via the Resend API.
  */
-export async function sendContactEmail(payload: EmailPayload): Promise<{ messageId: string }> {
-  const destinationEmail = process.env.CONTACT_RECEIVER || 'mohantyprateek777@gmail.com';
-  const senderUser = process.env.SMTP_USER || destinationEmail;
+export async function sendContactEmail(payload: EmailPayload): Promise<SendEmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY_MISSING');
+  }
+
+  const destinationEmail = process.env.CONTACT_RECEIVER || 'prateekmohanty2006@gmail.com';
+  // Use testing sender or configured custom verified sender
+  const sender = process.env.RESEND_SENDER || 'Portfolio Contact <onboarding@resend.dev>';
 
   const sanitizedName = sanitizeHeader(payload.name);
   const sanitizedSubject = sanitizeHeader(payload.subject);
@@ -202,17 +177,30 @@ Origin: https://prateek-mohanty.vercel.app/
 </html>
   `.trim();
 
-  const transporter = getMailTransporter();
+  const resend = getResendClient();
 
-  const info = await transporter.sendMail({
-    from: `"${sanitizedName} via Portfolio" <${senderUser}>`,
+  const { data, error } = await resend.emails.send({
+    from: sender,
     to: destinationEmail,
-    replyTo: `"${sanitizedName}" <${sanitizedEmail}>`,
+    replyTo: `${sanitizedName} <${sanitizedEmail}>`,
     subject: mailSubject,
     text: textBody,
     html: htmlBody
   });
 
-  return { messageId: info.messageId };
-}
+  if (error) {
+    // Log useful diagnostic error details without exposing API keys or visitor message content
+    console.error('[Resend Delivery Error]:', {
+      name: error.name,
+      message: error.message
+    });
+    throw new Error(`RESEND_ERROR: ${error.message}`);
+  }
 
+  if (!data?.id) {
+    throw new Error('RESEND_ERROR: No message ID returned from Resend API');
+  }
+
+  console.log(`[Resend Success]: Email accepted for delivery. Resend ID: ${data.id}`);
+  return { messageId: data.id };
+}
