@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { ArrowDown, Code2, Sparkles } from 'lucide-react';
+import { ArrowDown, Code2, Sparkles, Download, ExternalLink } from 'lucide-react';
 import { profileData } from '../../data/profile';
 import { SplineHero } from '../spline/SplineHero';
 import { GithubIcon, LinkedinIcon } from '../ui/Icons';
@@ -210,9 +210,32 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
+              href="/resume/Prateek_Mohanty_AI_ML_Resume.pdf"
+              download="Prateek_Mohanty_AI_ML_Resume.pdf"
+              onClick={() => soundFx.playSelect()}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-display font-medium text-xs sm:text-sm text-[#00D9FF] bg-[#0C0E15] border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#00D9FF]/10 hover:shadow-[0_0_20px_rgba(0,217,255,0.25)] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
+              title="Download Prateek Mohanty's Resume (PDF)"
+            >
+              <Download className="w-4 h-4 text-[#00D9FF]" />
+              <span>Download Resume</span>
+            </a>
+
+            <a
+              href="/resume/Prateek_Mohanty_AI_ML_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => soundFx.playSelect()}
+              className="inline-flex items-center gap-1.5 px-4 py-3 rounded-lg font-display font-medium text-xs sm:text-sm text-[#9095A6] bg-[#0C0E15] border border-white/10 hover:border-white/20 hover:text-[#F5F5FA] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
+              title="View Resume in new tab"
+            >
+              <ExternalLink className="w-3.5 h-3.5 text-[#9095A6]" />
+              <span>View Resume</span>
+            </a>
+
+            <a
               href="#contact"
               onClick={() => soundFx.playSelect()}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-display font-medium text-xs sm:text-sm text-[#F5F5FA] bg-[#0C0E15] border border-white/10 hover:border-[#00D9FF]/50 hover:text-[#00D9FF] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-display font-medium text-xs sm:text-sm text-[#F5F5FA] bg-[#0C0E15] border border-white/10 hover:border-[#9B5CFF]/50 hover:text-[#9B5CFF] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
             >
               <span>Let's Connect</span>
             </a>
