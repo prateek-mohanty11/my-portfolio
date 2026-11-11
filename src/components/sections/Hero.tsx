@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
               HELLO, I'M
             </span>
             <span className="text-xs font-mono text-[#9095A6] hidden sm:inline-block pointer-events-none">
-              // B.Tech AI & ML • 3rd Year
+              // B.Tech CSE • 3rd Year
             </span>
           </motion.div>
 

@@ -66,14 +66,16 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onCl
         reply = `Prateek's tech stack spans 4 main branches:\n• AI & ML: Python, Machine Learning, NumPy, Pandas, Matplotlib, Seaborn\n• Web Dev: HTML, CSS, JavaScript, Tailwind CSS, React\n• Programming: Java, C, Python\n• Design: Figma, Canva, Adobe Illustrator, Social Media Design.`;
       } else if (q.includes('experience') || q.includes('iic') || q.includes('intern') || q.includes('pmec')) {
         reply = `Prateek is currently the Event Management Head and former Social Media Designer at Idea & Innovation Cell (IIC), PMEC. He also completed industrial internships at Central Tool Room & Training Centre (CTTC) Odisha and ApexPlanet Software Pvt. Ltd.`;
-      } else if (q.includes('education') || q.includes('college') || q.includes('degree') || q.includes('year')) {
-        reply = `Prateek is in his 3rd Year of B.Tech specializing in Artificial Intelligence and Machine Learning at Parala Maharaja Engineering College (PMEC), Odisha, India.`;
+      } else if (q.includes('education') || q.includes('college') || q.includes('degree') || q.includes('year') || q.includes('branch')) {
+        reply = `Prateek is in his 3rd Year of B.Tech in Computer Science & Engineering (CSE) at Parala Maharaja Engineering College (PMEC), Odisha, India.`;
       } else if (q.includes('achievement') || q.includes('hackathon') || q.includes('sih') || q.includes('osfic') || q.includes('prize')) {
         reply = `Prateek has participated in the Smart India Hackathon (SIH), the Odisha Seva First Innovation Challenge (OSFIC), and secured multiple awards in college technical club events.`;
+      } else if (q.includes('resume') || q.includes('cv')) {
+        reply = `You can download Prateek's official AI/ML resume directly using the "Download Resume" button in the Hero section or the top navigation bar, or view it directly in your browser at /resume/Prateek_Mohanty_AI_ML_Resume.pdf`;
       } else if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach')) {
         reply = `You can reach Prateek directly at prateekmohanty2006@gmail.com, or connect on GitHub (@prateek-mohanty11) and LinkedIn!`;
       } else {
-        reply = `Prateek Mohanty is a 3rd-year B.Tech AI & ML student, creative developer, and UI/UX designer from Odisha, India. His focus is on combining AI systems with thoughtful design to build practical solutions like NeedSense AI and SkillGapRadar.`;
+        reply = `Prateek Mohanty is a 3rd-year B.Tech Computer Science & Engineering (CSE) student, aspiring AI/ML engineer, creative developer, and UI/UX designer from Odisha, India. His focus is on combining AI systems with thoughtful design to build practical solutions like NeedSense AI and SkillGapRadar.`;
       }
 
       const aiMsg: Message = {
