@@ -43,7 +43,7 @@ export const profileData: Profile = {
     github: "https://github.com/prateek-mohanty11/",
     linkedin: "https://www.linkedin.com/in/prateek-mohanty-134806331/",
     leetcode: "https://leetcode.com/u/prateek_mohanty11/",
-    resumeUrl: "/resume/Prateek_Mohanty_AI_ML_Resume.pdf" // Static production asset path in public/resume/
+    resumeUrl: "/resume/Prateek_Mohanty_AI_ML_Resume.pdf?v=20261122" // Static production asset path in public/resume/ with cache-busting
   }
 };
 

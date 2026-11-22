@@ -210,7 +210,7 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
-              href="/resume/Prateek_Mohanty_AI_ML_Resume.pdf"
+              href={profileData.contact.resumeUrl || "/resume/Prateek_Mohanty_AI_ML_Resume.pdf?v=20261122"}
               download="Prateek_Mohanty_AI_ML_Resume.pdf"
               onClick={() => soundFx.playSelect()}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-display font-medium text-xs sm:text-sm text-[#00D9FF] bg-[#0C0E15] border border-[#00D9FF]/40 hover:border-[#00D9FF] hover:bg-[#00D9FF]/10 hover:shadow-[0_0_20px_rgba(0,217,255,0.25)] transition-all transform hover:-translate-y-0.5 pointer-events-auto"
@@ -221,7 +221,7 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
-              href="/resume/Prateek_Mohanty_AI_ML_Resume.pdf"
+              href={profileData.contact.resumeUrl || "/resume/Prateek_Mohanty_AI_ML_Resume.pdf?v=20261122"}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundFx.playSelect()}
