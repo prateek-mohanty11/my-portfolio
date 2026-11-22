@@ -48,7 +48,7 @@ export const automationConfig: AutomationConfig = {
     aiAssistantEndpoint: (import.meta as any).env?.VITE_AI_ASSISTANT_URL || null,
     
     // Configure resume URL here when ready to publish resume PDF
-    resumeDocumentUrl: (import.meta as any).env?.VITE_RESUME_URL || '/resume/Prateek_Mohanty_AI_ML_Resume.pdf?v=20261122',
+    resumeDocumentUrl: (import.meta as any).env?.VITE_RESUME_URL || '/resume/Prateek_Mohanty_AI_ML_Resume.pdf?v=20261122-v2',
     
     enableGitHubCronSync: false,
     enableLeetCodeWorkerSync: false,
